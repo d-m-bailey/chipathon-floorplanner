@@ -278,8 +278,14 @@ class MainWindow(QMainWindow):
     def open(self):
         if not self.discard_ok():return
         path,_=QFileDialog.getOpenFileName(self,'Open floorplan','','JSON (*.json)')
-        if path:
-            plan=loads(Path(path).read_text(),self.catalog); self.checkpoint(); self.plan=plan; self.path=path; self.dirty=False; self.refresh(); self.view.fit()
+        if path: self.load_file(path)
+    def load_file(self,path,record_history=True):
+        path=str(Path(path).expanduser().resolve())
+        plan=loads(Path(path).read_text(),self.catalog)
+        if record_history: self.checkpoint()
+        else: self.undo_stack.clear(); self.redo_stack.clear()
+        self.plan=plan; self.path=path; self.selected=None; self.dirty=False
+        self.refresh(); self.view.fit()
     def save_plan(self,save_as=False):
         path=self.path
         if not path or save_as:path,_=QFileDialog.getSaveFileName(self,'Save floorplan',path or 'floorplan.json','JSON (*.json)')

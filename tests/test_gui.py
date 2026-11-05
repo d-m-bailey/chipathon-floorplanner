@@ -102,3 +102,19 @@ def test_undefined_project_is_listed_but_not_placeable(window):
     w.view.show_preview(w.view.mapFromScene(905,2030),'TBD')
     assert w.view.candidate is None and w.view.preview is None
     w.view.commit(); assert w.plan.assignment('TBD')==(None,None)
+
+def test_startup_file_loading(window,tmp_path):
+    from main import parse_args
+    from floorplanner.models import Plan,Frame
+    from floorplanner.persistence import save
+    path=tmp_path/'initial plan.json'
+    plan=Plan([Project('Startup',pin_count=5)],[Frame('initial')])
+    save(path,plan,window.catalog)
+    assert parse_args([str(path)]).filename==str(path)
+    assert parse_args([]).filename is None
+    window.load_file(path,record_history=False)
+    assert window.plan==plan and window.path==str(path.resolve())
+    assert not window.dirty and not window.undo_stack
+    bad=tmp_path/'bad.json'; bad.write_text('{}')
+    with pytest.raises(ValueError): window.load_file(bad,record_history=False)
+    assert window.plan==plan and window.path==str(path.resolve())
