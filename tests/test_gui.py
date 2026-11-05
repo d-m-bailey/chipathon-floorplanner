@@ -187,6 +187,46 @@ def test_pin_dots_reflect_and_show_names(window):
         w.plan.frames[0].placements=[Placement('P01','A',mx,False)]; w.refresh()
         block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
         dots=[i for i in block.childItems() if isinstance(i,QGraphicsEllipseItem)]
-        assert {d.toolTip() for d in dots}=={'VSS','VDD'}
+        assert {d.toolTip() for d in dots}=={'VSS (unknown)','VDD (unknown)'}
         positions.append(sorted(d.rect().center().x() for d in dots))
     assert positions==[[350,350],[2585,2585]]
+
+def test_pin_type_colors_and_zoom_labels(window):
+    from PySide6.QtGui import QColor,QImage,QPainter
+    from PySide6.QtWidgets import QGraphicsEllipseItem,QStyleOptionGraphicsItem
+    from floorplanner.gui.main_window import PinLabel
+    from floorplanner.project_pins import pin_color
+    types=['ground','power','input_cmos','input_schmitt','bidirectional']
+    assert [pin_color(t) for t in types]==['#000000','#ff0000','#00b050','#ffff00','#0066ff']
+    w=window; w.project_pins={'P01':[{'name':t,'io_type':t} for t in types]}
+    w.plan.projects=[Project('P01')]; w.plan.frames[0].placements=[Placement('P01','A')]; w.refresh()
+    block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+    dots=[i for i in block.childItems() if isinstance(i,QGraphicsEllipseItem)]
+    assert {d.brush().color().name() for d in dots}=={pin_color(t) for t in types}
+    ground=next(d for d in dots if d.toolTip().startswith('ground'))
+    label=next(i for i in ground.childItems() if isinstance(i,PinLabel))
+    assert label.brush().color()==QColor('white')
+    assert label.mapToParent(label.boundingRect().center()).x()==pytest.approx(ground.rect().center().x())
+    assert label.mapToParent(label.boundingRect().center()).y()==pytest.approx(ground.rect().center().y())
+    assert label.boundingRect().height()*(label.transform().m11()**2+label.transform().m12()**2)**0.5==pytest.approx(ground.rect().height()*0.75)
+    transform=label.transform()
+    assert abs(transform.m12()/transform.m11())==pytest.approx(1)
+    for lod,visible in [(0.15,False),(0.6,True)]:
+        image=QImage(300,100,QImage.Format_ARGB32); image.fill(0)
+        painter=QPainter(image); painter.scale(lod,lod)
+        label.paint(painter,QStyleOptionGraphicsItem()); painter.end()
+        assert any(image.pixelColor(x,y).alpha()>0 for x in range(image.width()) for y in range(image.height()))==visible
+
+def test_pin_label_angle_tracks_single_axis_reflection(window):
+    from PySide6.QtWidgets import QGraphicsEllipseItem
+    from floorplanner.gui.main_window import PinLabel
+    w=window; w.project_pins={'P01':[{'name':'VDD','io_type':'power'}]}
+    w.plan.projects=[Project('P01')]
+    for mx,my in [(False,False),(True,False),(False,True),(True,True)]:
+        w.plan.frames[0].placements=[Placement('P01','A',mx,my)]; w.refresh()
+        block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+        dot=next(i for i in block.childItems() if isinstance(i,QGraphicsEllipseItem))
+        label=next(i for i in dot.childItems() if isinstance(i,PinLabel))
+        assert label.background==dot.brush().color()
+        # Y inversion for screen readability reverses the transform's slope.
+        assert label.transform().m12()/label.transform().m11()==pytest.approx(1 if mx!=my else -1)

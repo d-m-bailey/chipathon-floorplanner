@@ -135,7 +135,7 @@ def test_project_pin_markers(catalog,tmp_path):
     from floorplanner.project_pins import load_project_pins,pin_markers
     p=tmp_path/'A01'; p.mkdir(); (p/'info.yaml').write_text('pins:\n- name: VSS\n- name: VDD\n')
     pins,reports=load_project_pins(tmp_path)
-    assert pins=={'A01':['VSS','VDD']} and not reports
+    assert pins=={'A01':[{'name':'VSS','io_type':'unknown'},{'name':'VDD','io_type':'unknown'}]} and not reports
     names=[f'p{i}' for i in range(22)]
     b=catalog['A']; normal=pin_markers(b,names)
     assert len(normal)==22

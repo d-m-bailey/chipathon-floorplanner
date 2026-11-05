@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from PySide6.QtCore import Qt, QRectF, QMimeData, QTimer, QPointF
 from PySide6.QtGui import QAction, QColor, QPen, QBrush, QPainterPath, QTransform, QDrag, QPainter, QImage, QKeySequence
-from PySide6.QtWidgets import (QMainWindow,QWidget,QHBoxLayout,QVBoxLayout,QLineEdit,QListWidget,QListWidgetItem,QGraphicsView,QGraphicsScene,QGraphicsItem,QGraphicsRectItem,QGraphicsEllipseItem,QGraphicsSimpleTextItem,QTextEdit,QSplitter,QInputDialog,QFileDialog,QMessageBox,QCheckBox,QSpinBox,QLabel)
+from PySide6.QtWidgets import (QMainWindow,QWidget,QHBoxLayout,QVBoxLayout,QLineEdit,QListWidget,QListWidgetItem,QGraphicsView,QGraphicsScene,QGraphicsItem,QGraphicsRectItem,QGraphicsEllipseItem,QStyleOptionGraphicsItem,QGraphicsSimpleTextItem,QTextEdit,QSplitter,QInputDialog,QFileDialog,QMessageBox,QCheckBox,QSpinBox,QLabel)
 from PySide6.QtSvg import QSvgGenerator
 from ..models import Plan, Project, Frame, Placement, load_catalog, CONFIG
 from ..transforms import bounds, occupied
@@ -14,7 +14,30 @@ from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 from ..gds_audit import load_actual_sizes
-from ..project_pins import load_project_pins, pin_markers
+from ..project_pins import load_project_pins, pin_markers, pin_color
+
+class PinLabel(QGraphicsSimpleTextItem):
+    # Keep text hidden until its rendered font height is readable.
+    MIN_LOD=0.3
+
+    def __init__(self,text,background,parent,angle=45):
+        super().__init__(text,parent)
+        self.background=background
+        self.setBrush(QColor('white') if background==QColor('black') else QColor('black'))
+        font=self.font(); font.setPixelSize(22); self.setFont(font)
+        rect=self.boundingRect()
+        font_scale=parent.rect().height()*0.75/rect.height()
+        center=rect.center()
+        # The text center maps to the label origin, placed at the pin center.
+        transform=QTransform().scale(font_scale,-font_scale).rotate(angle).translate(-center.x(),-center.y())
+        self.setTransform(transform)
+
+    def paint(self,painter,option,widget=None):
+        if QStyleOptionGraphicsItem.levelOfDetailFromTransform(painter.worldTransform()) < self.MIN_LOD:
+            return
+        painter.fillRect(self.boundingRect(),self.background)
+        super().paint(painter,option,widget)
+
 
 class Palette(QListWidget):
     def startDrag(self, actions):
@@ -208,10 +231,14 @@ class MainWindow(QMainWindow):
                     actual_box.setBrush(QBrush(Qt.NoBrush))
                     actual_box.setToolTip(f'Actual GDS size: {width:g} × {height:g} µm')
                 names=self.project_pins.get(p.project_id.upper(),[])
-                for name,x,y in pin_markers(b,names,p.mirror_x,p.mirror_y):
+                for pin,(name,x,y) in zip(names,pin_markers(b,names,p.mirror_x,p.mirror_y)):
                     dot=QGraphicsEllipseItem(x-15,y-15,30,30,item)
-                    dot.setBrush(QColor('#ffe28a')); dot.setPen(QPen(QColor('#101c29'),3))
-                    dot.setZValue(3); dot.setToolTip(name)
+                    io_type=pin.get('io_type','unknown') if isinstance(pin,dict) else 'unknown'
+                    color=QColor(pin_color(io_type))
+                    dot.setBrush(color); dot.setPen(QPen(QColor('white'),2))
+                    dot.setZValue(3); dot.setToolTip(f'{name} ({io_type})')
+                    pin_label=PinLabel(name,color,dot,angle=-45 if p.mirror_x != p.mirror_y else 45)
+                    pin_label.setPos(x,y)
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
                 label.setBrush(QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))

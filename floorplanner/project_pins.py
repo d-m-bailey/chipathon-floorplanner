@@ -18,7 +18,8 @@ def load_project_pins(root=DATA_DIRECTORY):
             for entry in entries:
                 name=entry.get('name') if isinstance(entry,dict) else entry
                 if not isinstance(name,str) or not name.strip(): raise ValueError('Each pin needs a name')
-                names.append(name)
+                io_type=entry.get('io_type','unknown') if isinstance(entry,dict) else 'unknown'
+                names.append({'name':name,'io_type':str(io_type)})
             pins[path.parent.name.upper()]=names
         except (OSError,ValueError,yaml.YAMLError) as error:
             reports.append(f'{path}: {error}')
@@ -37,7 +38,8 @@ def pin_markers(block,names,mx=False,my=False):
     offsets=dict.fromkeys('WNES',0)
     x0,y0=block.base_lower_left_um; w,h=block.width_um,block.height_um
     result=[]
-    for name,pad in zip(names,pads):
+    for pin,pad in zip(names,pads):
+        name=pin['name'] if isinstance(pin,dict) else pin
         side=pad[0]; count=counts[side]
         if count>PADS_PER_SIDE: raise ValueError('More than 22 pads on one side')
         t=(offsets[side]+0.5)/count; offsets[side]+=1
@@ -45,3 +47,19 @@ def pin_markers(block,names,mx=False,my=False):
         x,y=x0+u,y0+v
         result.append((name,2935-x if mx else x,2935-y if my else y))
     return result
+
+
+PIN_COLORS = {
+    'ground': '#000000',
+    'power': '#ff0000',
+    'input_cmos': '#00b050',
+    'input_schmitt': '#ffff00',
+    'input_schottky': '#ffff00',
+    'input_schockty': '#ffff00',
+    'bidirectional': '#0066ff',
+    'bidirectional_24ma': '#0066ff',
+}
+
+
+def pin_color(io_type):
+    return PIN_COLORS.get(str(io_type).strip().lower(), '#c0c0c0')
