@@ -142,3 +142,24 @@ def test_export_control_status_is_live_and_not_saved(window,tmp_path):
     doc.unlink(); w.refresh()
     assert block().pen().color()==QColor('#ff3030')
     assert dumps(w.plan,w.catalog)==serialized
+
+def test_double_click_block_opens_project_editor(window,app,monkeypatch):
+    from PySide6.QtTest import QTest
+    from PySide6.QtCore import Qt
+    from PySide6.QtWidgets import QGraphicsSimpleTextItem
+    w=window
+    w.plan.projects=[Project('P01',pin_count=12)]
+    w.plan.frames[0].placements=[Placement('P01','A')]
+    w.refresh(); w.view.fit(); app.processEvents()
+    calls=[]
+    monkeypatch.setattr(w,'project_values',lambda project:calls.append(project.id))
+    block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+    label=next(i for i in block.childItems() if isinstance(i,QGraphicsSimpleTextItem))
+    for point in (block.mapToScene(900,1800),label.mapToScene(label.boundingRect().center())):
+        QTest.mouseDClick(w.view.viewport(),Qt.LeftButton,pos=w.view.mapFromScene(point))
+        QTest.mouseRelease(w.view.viewport(),Qt.LeftButton,pos=w.view.mapFromScene(point))
+        app.processEvents()
+        assert w.view.drag_id is None and w.view.candidate is None
+        assert w.plan.assignment('P01')[0] is w.plan.frames[0]
+    assert calls==['P01','P01']
+    assert w.selected=='P01'

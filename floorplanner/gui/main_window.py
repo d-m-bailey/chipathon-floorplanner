@@ -64,6 +64,17 @@ class View(QGraphicsView):
         if event.button()==Qt.LeftButton and item and item.data(0):
             self.drag_id=item.data(0); self.window.selected=self.drag_id; self.window.inspect(); event.accept(); return
         super().mousePressEvent(event)
+    def mouseDoubleClickEvent(self,event):
+        item=self.itemAt(event.position().toPoint())
+        while item and not item.data(0) and item.parentItem(): item=item.parentItem()
+        if event.button()==Qt.LeftButton and item and item.data(0):
+            self.window.selected=item.data(0)
+            self.drag_id=None
+            self.clear_preview()
+            event.accept()
+            self.window.guarded(self.window.edit_project)
+            return
+        super().mouseDoubleClickEvent(event)
     def mouseMoveEvent(self,event):
         if self.drag_id: self.show_preview(event.position().toPoint(),self.drag_id); return
         super().mouseMoveEvent(event)
