@@ -77,7 +77,7 @@ def test_frame_click_and_drag_preserves_frame_and_projects(window,app):
     item=w.frame_items[0]
     block=next(i for i in item.childItems() if i.data(0)=='P01')
     before=block.scenePos()
-    end=start+QPoint(30,-20)
+    end=start+QPoint(70,-60)
     QTest.mousePress(w.view.viewport(),Qt.LeftButton,pos=start)
     QTest.mouseMove(w.view.viewport(),end,delay=20)
     # Projects follow the frame during the drag, before the scene is rebuilt.
@@ -86,6 +86,7 @@ def test_frame_click_and_drag_preserves_frame_and_projects(window,app):
     QTest.mouseRelease(w.view.viewport(),Qt.LeftButton,pos=end)
     app.processEvents()
     assert frame.canvas_position!=[0,0]
+    assert all(v % 500 == 0 for v in frame.canvas_position)
     assert len(w.plan.frames)==4 and len(frame.placements)==1
     assert len([i for i in w.view.scene().items() if isinstance(i,FrameItem)])==4
     w.undo(); assert w.plan.frames[0].canvas_position==[0,0]

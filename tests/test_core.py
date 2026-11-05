@@ -105,3 +105,11 @@ def test_import_pin_count(tmp_path):
     projects,reports=import_projects(tmp_path)
     assert not reports
     assert projects[0].pin_count==12 and projects[0].name=='Example'
+
+def test_frame_grid():
+    from floorplanner.snapping import snap_frame_position, FRAME_PITCH_UM
+    assert FRAME_PITCH_UM==3000
+    assert snap_frame_position(2935,2935)==[3000,3000]
+    assert snap_frame_position(3400,3500)==[3500,3500]
+    assert snap_frame_position(249,-251)==[0,-500]
+    assert snap_frame_position(251,-249)==[500,0]

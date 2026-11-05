@@ -1,13 +1,13 @@
 import copy
 import json
 from pathlib import Path
-from PySide6.QtCore import Qt, QRectF, QMimeData, QTimer
+from PySide6.QtCore import Qt, QRectF, QMimeData, QTimer, QPointF
 from PySide6.QtGui import QAction, QColor, QPen, QBrush, QPainterPath, QTransform, QDrag, QPainter, QImage, QKeySequence
 from PySide6.QtWidgets import (QMainWindow,QWidget,QHBoxLayout,QVBoxLayout,QLineEdit,QListWidget,QListWidgetItem,QGraphicsView,QGraphicsScene,QGraphicsItem,QGraphicsRectItem,QGraphicsSimpleTextItem,QTextEdit,QSplitter,QInputDialog,QFileDialog,QMessageBox,QCheckBox,QSpinBox,QLabel)
 from PySide6.QtSvg import QSvgGenerator
 from ..models import Plan, Project, Frame, Placement, load_catalog, CONFIG
 from ..transforms import bounds, occupied
-from ..snapping import snap
+from ..snapping import snap, snap_frame_position, FRAME_PITCH_UM
 from ..validation import validate, validate_all
 from ..pin_mapping import mapped_pins
 from ..persistence import save, loads
@@ -25,7 +25,7 @@ class FrameItem(QGraphicsRectItem):
         self.frame=frame; self.window=window
         self.setPos(*frame.canvas_position)
         self.setPen(QPen(QColor('#8cabc1'),12)); self.setBrush(QColor('#172737'))
-        self.setFlags(QGraphicsItem.ItemIsMovable|QGraphicsItem.ItemIsSelectable)
+        self.setFlags(QGraphicsItem.ItemIsMovable|QGraphicsItem.ItemIsSelectable|QGraphicsItem.ItemSendsGeometryChanges)
         self.setZValue(-5)
         inner=QGraphicsRectItem(350,350,2235,2235,self)
         inner.setPen(QPen(QColor('#506578'),6,Qt.DashLine)); inner.setBrush(QColor('#203448'))
@@ -33,6 +33,10 @@ class FrameItem(QGraphicsRectItem):
         label.setBrush(QColor('#e1edf7')); label.setScale(10); label.setPos(0,3070); label.setTransform(QTransform.fromScale(1,-1))
         for pad in frame.pads:
             marker=QGraphicsRectItem(pad['x_um']-12,pad['y_um']-12,24,24,self); marker.setBrush(QColor('#f5c56c'))
+    def itemChange(self,change,value):
+        if change==QGraphicsItem.ItemPositionChange:
+            return QPointF(*snap_frame_position(value.x(),value.y()))
+        return super().itemChange(change,value)
     def mouseReleaseEvent(self,event):
         super().mouseReleaseEvent(event)
         pos=[round(self.pos().x()),round(self.pos().y())]
@@ -113,7 +117,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
-        self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*3400,(i//2)*3500],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
+        self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
         self.selected=None; self.path=None; self.undo_stack=[]; self.redo_stack=[]; self.dirty=False
         splitter=QSplitter(); self.setCentralWidget(splitter)
         left=QWidget(); layout=QVBoxLayout(left); layout.addWidget(QLabel('PROJECTS'))
@@ -218,7 +222,7 @@ class MainWindow(QMainWindow):
     def add_frame(self):
         i=1
         while any(f.id==f'chip_{i:02}' for f in self.plan.frames): i+=1
-        self.checkpoint(); self.plan.frames.append(Frame(f'chip_{i:02}',f'Chip {i}',[len(self.plan.frames)*3400,0],pads=copy.deepcopy(self.defaults['pads']))); self.refresh(); self.view.fit()
+        self.checkpoint(); self.plan.frames.append(Frame(f'chip_{i:02}',f'Chip {i}',[len(self.plan.frames)*FRAME_PITCH_UM,0],pads=copy.deepcopy(self.defaults['pads']))); self.refresh(); self.view.fit()
     def rename_frame(self):
         f=self.choose_frame()
         if not f:return
