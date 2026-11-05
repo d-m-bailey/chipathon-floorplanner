@@ -145,13 +145,14 @@ class MainWindow(QMainWindow):
         for p in self.plan.projects:
             if self.search.text().lower() not in (p.id+' '+p.name).lower(): continue
             f,_=self.plan.assignment(p.id)
-            item=QListWidgetItem(f'{p.id} · {p.name}\n{p.block_type} · {p.pin_count}/{self.catalog[p.block_type].pin_count} pins · {f.name or f.id if f else "unassigned"}')
+            item=QListWidgetItem(f'{p.id} · {p.block_type} · {p.pin_count}/{self.catalog[p.block_type].pin_count} pins · {f.name or f.id if f else "unassigned"}')
+            item.setToolTip(p.name)
             if f:
                 item.setText('✓ '+item.text())
                 item.setBackground(QColor('#d5eee0'))
                 item.setForeground(QColor('#174b32'))
                 font=item.font(); font.setBold(True); item.setFont(font)
-                item.setToolTip(f'Placed on {f.name or f.id}')
+                item.setToolTip(f'{p.name} — Placed on {f.name or f.id}')
             item.setData(Qt.UserRole,p.id); self.palette.addItem(item)
             if p.id==selected: self.palette.setCurrentItem(item)
         self.palette.blockSignals(False)
@@ -168,7 +169,7 @@ class MainWindow(QMainWindow):
                 item=self.view.scene().addPath(path,QPen(QColor('white') if self.selected==p.project_id else color,15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
-                label=QGraphicsSimpleTextItem(f'{p.project_id} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
+                label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
                 label.setBrush(QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
                 label.setPos(r.x+35,r.y+r.h-40); label.setTransform(QTransform.fromScale(1,-1))
