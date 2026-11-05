@@ -15,7 +15,7 @@ from ..project_loader import import_projects
 
 class Palette(QListWidget):
     def startDrag(self, actions):
-        if not self.currentItem(): return
+        if not self.currentItem() or not self.currentItem().flags() & Qt.ItemIsDragEnabled: return
         mime=QMimeData(); mime.setText(self.currentItem().data(Qt.UserRole))
         drag=QDrag(self); drag.setMimeData(mime); drag.exec(Qt.MoveAction)
 
@@ -84,6 +84,8 @@ class View(QGraphicsView):
         self.clear_preview(); w=self.window
         try: project=w.plan.project(pid)
         except StopIteration: return
+        if project.block_type=='?':
+            w.statusBar().showMessage('Choose a defined block type before placing this project'); return
         pos=self.mapToScene(point)
         for frame in reversed(w.plan.frames):
             fx,fy=frame.canvas_position
@@ -145,8 +147,10 @@ class MainWindow(QMainWindow):
         for p in self.plan.projects:
             if self.search.text().lower() not in (p.id+' '+p.name).lower(): continue
             f,_=self.plan.assignment(p.id)
-            item=QListWidgetItem(f'{p.id} · {p.block_type} · {p.pin_count}/{self.catalog[p.block_type].pin_count} pins · {f.name or f.id if f else "unassigned"}')
-            item.setToolTip(p.name)
+            capacity=self.catalog[p.block_type].pin_count if p.block_type in self.catalog else '?'
+            item=QListWidgetItem(f'{p.id} · {p.block_type} · {p.pin_count}/{capacity} pins · {f.name or f.id if f else "unassigned"}')
+            if p.block_type=='?': item.setFlags(item.flags() & ~Qt.ItemIsDragEnabled)
+            item.setToolTip(p.name if p.block_type!='?' else p.name+' — Choose a block type to enable placement')
             if f:
                 item.setText('✓ '+item.text())
                 item.setBackground(QColor('#d5eee0'))
@@ -181,6 +185,8 @@ class MainWindow(QMainWindow):
             self.inspector.setPlainText('Select a project.\n\nDrag from the palette to a chip. X/Y reflect; Delete unassigns. Drag chip backgrounds to reposition frames. Scroll to zoom; drag empty canvas to pan.\n\nPhysical pad mapping is UNVERIFIED until coordinates are loaded.'); return
         try: p=self.plan.project(self.selected)
         except StopIteration: self.selected=None; self.inspect(); return
+        if p.block_type=='?':
+            self.inspector.setPlainText(f'{p.id}\n\n{p.name}\n\nType: ?\n\nPins: {p.pin_count}/?\n\nUnassigned: choose a defined block type before placing this project.'); return
         b=self.catalog[p.block_type]; f,pl=self.plan.assignment(p.id)
         lines=[p.id,p.name,f'Type: {b.name}',f'Pins: {p.pin_count}/{b.pin_count}',f'Dimensions: {b.width_um} × {b.height_um} µm',f'Source area: {b.source_area_um2:,} µm²',f'Calculated area: {b.area:,} µm²',f'Source utilization: {b.source_utilization:.2%}',f'Base lower-left: {b.base_lower_left_um}',f'Frame: {f.name or f.id if f else "Unassigned"}']
         if pl:
@@ -193,13 +199,11 @@ class MainWindow(QMainWindow):
         if not ok or not pid.strip(): return
         pid=pid.strip()
         if any(p.id==pid and p is not existing for p in self.plan.projects): raise ValueError('Project ID already exists')
-        name,ok=QInputDialog.getText(self,'Project','Display name:',text=existing.name if existing else pid)
+        types=list(self.catalog)+['?']; bt,ok=QInputDialog.getItem(self,'Block type','Choose block type:',types,types.index(existing.block_type) if existing else types.index('A'),False)
         if not ok:return
-        types=list(self.catalog); bt,ok=QInputDialog.getItem(self,'Block type','Choose block type:',types,types.index(existing.block_type) if existing else types.index('A'),False)
+        pin_count,ok=QInputDialog.getInt(self,'Pin count',f'Pin count (max_pins: {self.catalog[bt].pin_count if bt in self.catalog else '?'}):',existing.pin_count if existing else 0,0,2147483647)
         if not ok:return
-        pin_count,ok=QInputDialog.getInt(self,'Pin count',f'Pin count (max_pins: {self.catalog[bt].pin_count}):',existing.pin_count if existing else 0,0,2147483647)
-        if not ok:return
-        return Project(pid,name or pid,bt,pin_count,copy.deepcopy(existing.shared_nets) if existing else {})
+        return Project(pid,pid,bt,pin_count,copy.deepcopy(existing.shared_nets) if existing else {})
     def add_project(self):
         p=self.project_values()
         if p: self.checkpoint(); self.plan.projects.append(p); self.selected=p.id; self.refresh()
@@ -246,7 +250,7 @@ class MainWindow(QMainWindow):
     def import_yaml(self):
         root=QFileDialog.getExistingDirectory(self,'Select project root')
         if not root:return
-        bt,ok=QInputDialog.getItem(self,'Import','Default block type (explicit selection):',list(self.catalog),0,False)
+        bt,ok=QInputDialog.getItem(self,'Import','Default block type (explicit selection):',list(self.catalog)+['?'],0,False)
         if not ok:return
         adapter=None
         adapter_path,_=QFileDialog.getOpenFileName(self,'Optional field adapter JSON (Cancel uses id/name/pin_count/shared_nets)','','JSON (*.json)')

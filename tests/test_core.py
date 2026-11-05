@@ -113,3 +113,11 @@ def test_frame_grid():
     assert snap_frame_position(3400,3500)==[3500,3500]
     assert snap_frame_position(249,-251)==[0,-500]
     assert snap_frame_position(251,-249)==[500,0]
+
+def test_undefined_block(catalog):
+    plan=Plan([Project('TBD',block_type='?',pin_count=12)],[Frame('f')])
+    assert loads(dumps(plan,catalog),catalog)==plan
+    placement=Placement('TBD','?')
+    assert 'Undefined block type' in validate(plan,plan.frames[0],placement,catalog)[0][0]
+    plan.frames[0].placements.append(placement)
+    with pytest.raises(ValueError,match='Undefined block type'): loads(dumps(plan,catalog),catalog)

@@ -54,7 +54,7 @@ def test_pin_count_entry_and_display(window,monkeypatch):
     monkeypatch.setattr(QInputDialog,'getItem',lambda *a,**k:('A',True))
     monkeypatch.setattr(QInputDialog,'getInt',lambda *a,**k:(12,True))
     window.add_project()
-    assert calls[1]==('Display name:','ProjectName')
+    assert calls==[('Project ID:','')]
     project=window.plan.projects[0]
     assert project.name=='ProjectName' and project.pin_count==12
     assert '12/22' in window.palette.item(0).text()
@@ -91,3 +91,14 @@ def test_frame_click_and_drag_preserves_frame_and_projects(window,app):
     assert len([i for i in w.view.scene().items() if isinstance(i,FrameItem)])==4
     w.undo(); assert w.plan.frames[0].canvas_position==[0,0]
     w.redo(); assert w.plan.frames[0].canvas_position!=[0,0]
+
+def test_undefined_project_is_listed_but_not_placeable(window):
+    from PySide6.QtCore import Qt
+    w=window; w.plan.projects=[Project('TBD',block_type='?',pin_count=12)]; w.selected='TBD'; w.refresh()
+    row=w.palette.item(0)
+    assert 'TBD · ? · 12/? pins · unassigned' in row.text()
+    assert not row.flags() & Qt.ItemIsDragEnabled
+    assert 'choose a defined block type' in w.inspector.toPlainText()
+    w.view.show_preview(w.view.mapFromScene(905,2030),'TBD')
+    assert w.view.candidate is None and w.view.preview is None
+    w.view.commit(); assert w.plan.assignment('TBD')==(None,None)

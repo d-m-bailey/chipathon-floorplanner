@@ -29,7 +29,7 @@ def loads(text,catalog):
         for pad in f.pads:
             if not isinstance(pad.get('id'),str) or any(type(pad.get(k)) is not int for k in ('x_um','y_um')): raise ValueError('Invalid pad coordinates')
     for p in projects:
-        if not p.id or p.block_type not in catalog: raise ValueError('Invalid project or block type')
+        if not p.id or (p.block_type not in catalog and p.block_type!='?'): raise ValueError('Invalid project or block type')
     plan=Plan(projects,frames)
     errors=[f'{p.project_id}: {e}' for f,p,es,ws in validate_all(plan,catalog) for e in es]
     if errors: raise ValueError('\n'.join(errors))

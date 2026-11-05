@@ -4,6 +4,7 @@ from .pin_mapping import mapped_pins
 
 def validate(plan, frame, placement, catalog, moving=False):
     errors=[]; warnings=[]
+    if placement.block_type=='?': return ['Undefined block type: choose a block type before placement'],[]
     if placement.block_type not in catalog: return ['Unknown block type'],[]
     try: project=plan.project(placement.project_id)
     except StopIteration: return ['Unknown project'],[]
