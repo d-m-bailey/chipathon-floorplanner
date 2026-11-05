@@ -1,0 +1,315 @@
+[
+  {
+    "name": "EH",
+    "pin_ranges": [
+      "W12-W16"
+    ],
+    "base_lower_left_um": [
+      350,
+      1475
+    ],
+    "pin_count": 5,
+    "width_um": 605,
+    "height_um": 495,
+    "source_area_um2": 299475,
+    "source_utilization": 0.0625,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "EV",
+    "pin_ranges": [
+      "N07-N11"
+    ],
+    "base_lower_left_um": [
+      965,
+      1980
+    ],
+    "pin_count": 5,
+    "width_um": 495,
+    "height_um": 605,
+    "source_area_um2": 299475,
+    "source_utilization": 0.0625,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "EH2",
+    "pin_ranges": [
+      "W07-W16"
+    ],
+    "base_lower_left_um": [
+      350,
+      965
+    ],
+    "pin_count": 10,
+    "width_um": 605,
+    "height_um": 1005,
+    "source_area_um2": 608025,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "EV2",
+    "pin_ranges": [
+      "N07-N16"
+    ],
+    "base_lower_left_um": [
+      965,
+      1980
+    ],
+    "pin_count": 10,
+    "width_um": 1005,
+    "height_um": 605,
+    "source_area_um2": 608025,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "D",
+    "pin_ranges": [
+      "W17-W22",
+      "N01-N06"
+    ],
+    "base_lower_left_um": [
+      350,
+      1980
+    ],
+    "pin_count": 12,
+    "width_um": 605,
+    "height_um": 605,
+    "source_area_um2": 366025,
+    "source_utilization": 0.0625,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "CH",
+    "pin_ranges": [
+      "W12-W16"
+    ],
+    "base_lower_left_um": [
+      350,
+      1475
+    ],
+    "pin_count": 5,
+    "width_um": 1110,
+    "height_um": 495,
+    "source_area_um2": 549450,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "CH2",
+    "pin_ranges": [
+      "W07-W16"
+    ],
+    "base_lower_left_um": [
+      350,
+      965
+    ],
+    "pin_count": 10,
+    "width_um": 1110,
+    "height_um": 1005,
+    "source_area_um2": 1115550,
+    "source_utilization": 0.25,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "CV",
+    "pin_ranges": [
+      "N07-N11"
+    ],
+    "base_lower_left_um": [
+      965,
+      1475
+    ],
+    "pin_count": 5,
+    "width_um": 495,
+    "height_um": 1110,
+    "source_area_um2": 549450,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "CV2",
+    "pin_ranges": [
+      "N07-N16"
+    ],
+    "base_lower_left_um": [
+      965,
+      1475
+    ],
+    "pin_count": 10,
+    "width_um": 1005,
+    "height_um": 1110,
+    "source_area_um2": 1115550,
+    "source_utilization": 0.25,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "BV",
+    "pin_ranges": [
+      "W12-W22",
+      "N01-N06"
+    ],
+    "base_lower_left_um": [
+      350,
+      1475
+    ],
+    "pin_count": 17,
+    "width_um": 605,
+    "height_um": 1110,
+    "source_area_um2": 671550,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "BVE",
+    "pin_ranges": [
+      "W07-W22",
+      "N01-N06"
+    ],
+    "base_lower_left_um": [
+      350,
+      965
+    ],
+    "pin_count": 22,
+    "width_um": 605,
+    "height_um": 1620,
+    "source_area_um2": 980100,
+    "source_utilization": 0.1875,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "BH",
+    "pin_ranges": [
+      "W17-W22",
+      "N01-N11"
+    ],
+    "base_lower_left_um": [
+      350,
+      1980
+    ],
+    "pin_count": 17,
+    "width_um": 1110,
+    "height_um": 605,
+    "source_area_um2": 671550,
+    "source_utilization": 0.125,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "BHE",
+    "pin_ranges": [
+      "W17-W22",
+      "N01-N16"
+    ],
+    "base_lower_left_um": [
+      350,
+      1980
+    ],
+    "pin_count": 22,
+    "width_um": 1620,
+    "height_um": 605,
+    "source_area_um2": 980100,
+    "source_utilization": 0.1875,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "A",
+    "pin_ranges": [
+      "W12-W22",
+      "N01-N11"
+    ],
+    "base_lower_left_um": [
+      350,
+      1475
+    ],
+    "pin_count": 22,
+    "width_um": 1110,
+    "height_um": 1110,
+    "source_area_um2": 1232100,
+    "source_utilization": 0.25,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "ACV",
+    "pin_ranges": [
+      "W12-W22",
+      "N01-N16"
+    ],
+    "base_lower_left_um": [
+      350,
+      1475
+    ],
+    "pin_count": 27,
+    "width_um": 1620,
+    "height_um": 1110,
+    "source_area_um2": 1798200,
+    "source_utilization": 0.375,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "ACH",
+    "pin_ranges": [
+      "W07-W22",
+      "N01-N11"
+    ],
+    "base_lower_left_um": [
+      350,
+      965
+    ],
+    "pin_count": 27,
+    "width_um": 1110,
+    "height_um": 1620,
+    "source_area_um2": 1798200,
+    "source_utilization": 0.375,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "ACE",
+    "pin_ranges": [
+      "W07-W22",
+      "N01-N16"
+    ],
+    "base_lower_left_um": [
+      350,
+      965
+    ],
+    "pin_count": 32,
+    "width_um": 1620,
+    "height_um": 1620,
+    "source_area_um2": 2624400,
+    "source_utilization": 0.5625,
+    "excluded_rectangles_local_um": []
+  },
+  {
+    "name": "ACE2",
+    "pin_ranges": [
+      "W07-W22",
+      "N01-N16",
+      "E16-E01",
+      "S22-S07"
+    ],
+    "base_lower_left_um": [
+      350,
+      350
+    ],
+    "pin_count": 64,
+    "width_um": 2235,
+    "height_um": 2235,
+    "source_area_um2": 4949325,
+    "source_utilization": 0.875,
+    "excluded_rectangles_local_um": [
+      [
+        0,
+        0,
+        615,
+        615
+      ],
+      [
+        1620,
+        1620,
+        2235,
+        2235
+      ]
+    ]
+  }
+]

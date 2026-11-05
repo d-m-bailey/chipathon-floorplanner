@@ -1,0 +1,41 @@
+# Chipathon 2026 Floorplanner
+
+Desktop planning tool for the GF180MCU D chip frames. Requires Python 3.11+.
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+Create a project with **Add Project**, explicitly choose its block type and enter its pin count (shown as `pin_count/max_pins`). The display name defaults to the project name/ID. Drag a palette entry onto a chip near a candidate center. Green previews can be committed; red previews explain rejected placements in the status bar. Drag assigned blocks between frames. Select a project and press X/Y to reflect, Delete to unassign, F to fit. Drag a chip background to reposition it, drag empty space to pan, and scroll to zoom. Frame removal returns its projects to the unassigned palette. Editing a project returns it to the palette for revalidation.
+
+Four empty frames are provided at startup. The Floorplan menu contains frame management, project import, pad configuration, validation, SVG/PNG export, and save/open. All model changes support undo/redo. Saved plans include project metadata, individual frame pad catalogs, and a catalog hash; incompatible or invalid files are rejected before changing the current plan. Saves replace files atomically.
+
+## Pads and logical pins
+
+No physical pad numbering is guessed. **Load Pads** accepts either a JSON array or an object containing `pads`, with entries such as `{"id":"W12","x_um":0,"y_um":1500}`. Coordinates must be actual integer micrometers in the chip coordinate system. Reflection uses coordinate lookup. Missing mappings remain explicitly **UNVERIFIED**; geometric placement is still available. Explicit unreflected pad allocations can detect known conflicts without coordinates.
+
+Projects store a pin count rather than individual logical pin names. Capacity validation compares this count with the selected block’s maximum pins. Physical pad allocations still follow the block catalog for conflict detection. Source area and utilization remain separate from calculated geometry; the ACE2 area discrepancy is displayed.
+
+## YAML import
+
+Import recursively finds `info.yaml`. The default adapter reads `id`, `name`, `pin_count` (nonnegative integer), and `shared_nets` (mapping). Missing ID/name falls back to the parent folder and is reported. Unknown fields and invalid files are reported. No ID prefix determines a block type. Choose an explicit default type during import; edit individual projects afterward.
+
+Legacy saved plans and YAML pin lists are converted to counts automatically. New saves store only the count.
+
+The optional adapter file maps these keys to dotted field paths, for example:
+
+```json
+{"id":"project.id","name":"project.title","pin_count":"interface.pin_count","shared_nets":"interface.shared_nets"}
+```
+
+## Verification
+
+```sh
+python -m pytest -q
+QT_QPA_PLATFORM=offscreen python -m pytest -q tests/test_gui.py
+```
+
+Core geometry, transforms, snapping, validation, pin mapping and persistence import no Qt. Configuration is in `config/blocks.json` and `config/chip_frames.json`. The current chip size and keepout are intentionally fixed by the v1 specification. KLayout/GDS is not required.
