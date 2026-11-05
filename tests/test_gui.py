@@ -163,3 +163,18 @@ def test_double_click_block_opens_project_editor(window,app,monkeypatch):
         assert w.plan.assignment('P01')[0] is w.plan.frames[0]
     assert calls==['P01','P01']
     assert w.selected=='P01'
+
+def test_actual_size_box_is_centered_and_to_scale(window):
+    from PySide6.QtWidgets import QGraphicsRectItem
+    from PySide6.QtGui import QColor
+    w=window; w.actual_sizes={'P01':(603.13,269.59)}; w.selected='P01'
+    w.plan.projects=[Project('P01')]
+    for mx,my in [(False,False),(True,False),(False,True),(True,True)]:
+        w.plan.frames[0].placements=[Placement('P01','A',mx,my)]; w.refresh()
+        block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+        box=next(i for i in block.childItems() if isinstance(i,QGraphicsRectItem))
+        assert box.rect().width()==pytest.approx(603.13)
+        assert box.rect().height()==pytest.approx(269.59)
+        assert box.rect().center()==block.path().boundingRect().center()
+        assert box.pen().color()==QColor('white')
+        assert '603.13 × 269.59 µm' in w.inspector.toPlainText()

@@ -51,3 +51,7 @@ QT_QPA_PLATFORM=offscreen python -m pytest -q tests/test_gui.py
 Core geometry, transforms, snapping, validation, pin mapping and persistence import no Qt. Configuration is in `config/blocks.json` and `config/chip_frames.json`. The current chip size and keepout are intentionally fixed by the v1 specification. KLayout/GDS is not required.
 
 Export-control document status is checked from `data/export_control` beside the application source on startup and whenever the project display refreshes (including project edits). Filenames must start with the project code followed by a separator, for example `A01_Export_Control.docx`. Missing documents produce red project-list text and a red placement outline; assigned-project highlighting remains. The status is never stored in the plan JSON and does not prevent placement.
+
+Block fill colors are automatically distributed across distinct hues within each frame and recalculated when assignments change. Colors are derived for display and are not stored in the plan.
+
+At startup, `gds_project_audit.csv` is read using `Team` as the project code and `computed_width`/`computed_height` as the actual GDS dimensions in µm. Placed blocks show a centered white rectangle at that physical size, without scaling to fit or rotation. The inspector shows the dimensions; SVG/PNG exports include the rectangle. Missing or invalid dimensions omit the rectangle. These display measurements do not alter validation or saved plan data. Restart to reload changes to the CSV.

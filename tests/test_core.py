@@ -121,3 +121,12 @@ def test_undefined_block(catalog):
     assert 'Undefined block type' in validate(plan,plan.frames[0],placement,catalog)[0][0]
     plan.frames[0].placements.append(placement)
     with pytest.raises(ValueError,match='Undefined block type'): loads(dumps(plan,catalog),catalog)
+
+def test_gds_audit_sizes(tmp_path):
+    from floorplanner.gds_audit import load_actual_sizes
+    path=tmp_path/'audit.csv'
+    path.write_text('Team,width,height,computed_width,computed_height\nA01,1110,550,603.13,269.59\nA02,1,1,nan,20\nA03,1,1,,5\n')
+    sizes,reports=load_actual_sizes(path)
+    assert sizes=={'A01':(603.13,269.59)}
+    assert len(reports)==2
+    assert load_actual_sizes(tmp_path/'missing.csv')[0]=={}

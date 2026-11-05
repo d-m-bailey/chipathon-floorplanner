@@ -13,6 +13,7 @@ from ..pin_mapping import mapped_pins
 from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
+from ..gds_audit import load_actual_sizes
 
 class Palette(QListWidget):
     def startDrag(self, actions):
@@ -130,6 +131,7 @@ class View(QGraphicsView):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
+        self.actual_sizes,self.audit_reports=load_actual_sizes()
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
         self.export_control_directory=EXPORT_CONTROL_DIRECTORY
@@ -150,6 +152,7 @@ class MainWindow(QMainWindow):
             menu.addAction(action)
             if text in ('Save','Add Project','Add Frame','Mirror X','Mirror Y','Undo','Redo','Fit View'): toolbar.addAction(action)
         self.refresh(); self.view.fit()
+        if self.audit_reports: self.statusBar().showMessage('; '.join(self.audit_reports))
     def guarded(self,fn):
         try: fn()
         except Exception as e: QMessageBox.warning(self,'Unable to complete action',str(e))
@@ -184,14 +187,24 @@ class MainWindow(QMainWindow):
         documented=documented_projects(self.export_control_directory)
         for f in self.plan.frames:
             frame_item=FrameItem(f,self); self.frame_items.append(frame_item); self.view.scene().addItem(frame_item)
+            project_ids=sorted(p.project_id for p in f.placements)
+            colors={pid:QColor.fromHsv(index*360//len(project_ids),135,210)
+                    for index,pid in enumerate(project_ids)}
             for p in f.placements:
                 b=self.catalog[p.block_type]; path=QPainterPath()
                 for r in occupied(b,p.mirror_x,p.mirror_y): path.addRect(r.x,r.y,r.w,r.h)
-                color=QColor.fromHsv(sum(map(ord,p.project_id))*37%360,135,210)
+                color=colors[p.project_id]
                 outline=QColor('#ff3030') if p.project_id.upper() not in documented else QColor('white') if self.selected==p.project_id else color
                 item=self.view.scene().addPath(path,QPen(outline,20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
+                actual=self.actual_sizes.get(p.project_id.upper())
+                if actual:
+                    width,height=actual; cx,cy=r.center
+                    actual_box=QGraphicsRectItem(cx-width/2,cy-height/2,width,height,item)
+                    actual_box.setPen(QPen(QColor('white'),8))
+                    actual_box.setBrush(QBrush(Qt.NoBrush))
+                    actual_box.setToolTip(f'Actual GDS size: {width:g} × {height:g} µm')
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
                 label.setBrush(QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
@@ -211,6 +224,8 @@ class MainWindow(QMainWindow):
         if pl:
             r=bounds(b,pl.mirror_x,pl.mirror_y); pins,verified=mapped_pins(b,pl.mirror_x,pl.mirror_y,f.pads); es,ws=validate(self.plan,f,pl,self.catalog)
             lines += [f'Current lower-left: ({r.x}, {r.y})',f'Mirror X: {pl.mirror_x}; Y: {pl.mirror_y}',f'Pads ({"verified" if verified else "UNVERIFIED"}): '+', '.join(pins),'Validation: '+('; '.join(es+ws) or 'Valid')]
+        actual=self.actual_sizes.get(p.id.upper())
+        lines += [f'Actual GDS size: {actual[0]:g} × {actual[1]:g} µm' if actual else 'Actual GDS size: unavailable']
         if b.area!=b.source_area_um2: lines+=['WARNING: source and calculated areas differ.']
         self.inspector.setPlainText('\n\n'.join(lines))
     def project_values(self,existing=None):
