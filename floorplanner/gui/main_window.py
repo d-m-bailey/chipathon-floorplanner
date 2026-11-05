@@ -12,6 +12,7 @@ from ..validation import validate, validate_all
 from ..pin_mapping import mapped_pins
 from ..persistence import save, loads
 from ..project_loader import import_projects
+from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 
 class Palette(QListWidget):
     def startDrag(self, actions):
@@ -120,6 +121,7 @@ class MainWindow(QMainWindow):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
+        self.export_control_directory=EXPORT_CONTROL_DIRECTORY
         self.selected=None; self.path=None; self.undo_stack=[]; self.redo_stack=[]; self.dirty=False
         splitter=QSplitter(); self.setCentralWidget(splitter)
         left=QWidget(); layout=QVBoxLayout(left); layout.addWidget(QLabel('PROJECTS'))
@@ -143,6 +145,7 @@ class MainWindow(QMainWindow):
     def checkpoint(self):
         self.undo_stack.append(copy.deepcopy(self.plan)); self.redo_stack.clear(); self.dirty=True
     def refresh_palette(self):
+        documented=documented_projects(self.export_control_directory)
         selected=self.selected; self.palette.blockSignals(True); self.palette.clear()
         for p in self.plan.projects:
             if self.search.text().lower() not in (p.id+' '+p.name).lower(): continue
@@ -157,6 +160,9 @@ class MainWindow(QMainWindow):
                 item.setForeground(QColor('#174b32'))
                 font=item.font(); font.setBold(True); item.setFont(font)
                 item.setToolTip(f'{p.name} — Placed on {f.name or f.id}')
+            if p.id.upper() not in documented:
+                item.setForeground(QColor('#c62828'))
+                item.setToolTip(item.toolTip()+' — Missing export control document')
             item.setData(Qt.UserRole,p.id); self.palette.addItem(item)
             if p.id==selected: self.palette.setCurrentItem(item)
         self.palette.blockSignals(False)
@@ -164,13 +170,15 @@ class MainWindow(QMainWindow):
         self.view.preview=None; self.view.candidate=None; self.view.scene().clear()
         # Keep Python subclasses alive while Qt dispatches mouse events.
         self.frame_items=[]
+        documented=documented_projects(self.export_control_directory)
         for f in self.plan.frames:
             frame_item=FrameItem(f,self); self.frame_items.append(frame_item); self.view.scene().addItem(frame_item)
             for p in f.placements:
                 b=self.catalog[p.block_type]; path=QPainterPath()
                 for r in occupied(b,p.mirror_x,p.mirror_y): path.addRect(r.x,r.y,r.w,r.h)
                 color=QColor.fromHsv(sum(map(ord,p.project_id))*37%360,135,210)
-                item=self.view.scene().addPath(path,QPen(QColor('white') if self.selected==p.project_id else color,15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
+                outline=QColor('#ff3030') if p.project_id.upper() not in documented else QColor('white') if self.selected==p.project_id else color
+                item=self.view.scene().addPath(path,QPen(outline,20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)

@@ -118,3 +118,27 @@ def test_startup_file_loading(window,tmp_path):
     bad=tmp_path/'bad.json'; bad.write_text('{}')
     with pytest.raises(ValueError): window.load_file(bad,record_history=False)
     assert window.plan==plan and window.path==str(path.resolve())
+
+def test_export_control_status_is_live_and_not_saved(window,tmp_path):
+    from PySide6.QtGui import QColor
+    from floorplanner.persistence import dumps
+    w=window; w.export_control_directory=tmp_path
+    w.plan.projects=[Project('A01',pin_count=12)]
+    w.plan.frames[0].placements=[Placement('A01','A')]; w.selected='A01'
+    serialized=dumps(w.plan,w.catalog)
+    def block(): return next(i for i in w.frame_items[0].childItems() if i.data(0)=='A01')
+    w.refresh()
+    assert w.palette.item(0).foreground().color()==QColor('#c62828')
+    assert 'Missing export control' in w.palette.item(0).toolTip()
+    assert block().pen().color()==QColor('#ff3030')
+    # A different project and a directory must not count as documents.
+    (tmp_path/'A010_Export.docx').write_text('')
+    (tmp_path/'A01_directory').mkdir()
+    w.refresh(); assert block().pen().color()==QColor('#ff3030')
+    doc=tmp_path/'A01_Export_Control.pdf'; doc.write_text('')
+    w.refresh()
+    assert w.palette.item(0).foreground().color()==QColor('#174b32')
+    assert block().pen().color()==QColor('white')
+    doc.unlink(); w.refresh()
+    assert block().pen().color()==QColor('#ff3030')
+    assert dumps(w.plan,w.catalog)==serialized

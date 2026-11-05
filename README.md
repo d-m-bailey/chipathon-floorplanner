@@ -49,3 +49,5 @@ QT_QPA_PLATFORM=offscreen python -m pytest -q tests/test_gui.py
 ```
 
 Core geometry, transforms, snapping, validation, pin mapping and persistence import no Qt. Configuration is in `config/blocks.json` and `config/chip_frames.json`. The current chip size and keepout are intentionally fixed by the v1 specification. KLayout/GDS is not required.
+
+Export-control document status is checked from `data/export_control` beside the application source on startup and whenever the project display refreshes (including project edits). Filenames must start with the project code followed by a separator, for example `A01_Export_Control.docx`. Missing documents produce red project-list text and a red placement outline; assigned-project highlighting remains. The status is never stored in the plan JSON and does not prevent placement.
