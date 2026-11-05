@@ -130,3 +130,18 @@ def test_gds_audit_sizes(tmp_path):
     assert sizes=={'A01':(603.13,269.59)}
     assert len(reports)==2
     assert load_actual_sizes(tmp_path/'missing.csv')[0]=={}
+
+def test_project_pin_markers(catalog,tmp_path):
+    from floorplanner.project_pins import load_project_pins,pin_markers
+    p=tmp_path/'A01'; p.mkdir(); (p/'info.yaml').write_text('pins:\n- name: VSS\n- name: VDD\n')
+    pins,reports=load_project_pins(tmp_path)
+    assert pins=={'A01':['VSS','VDD']} and not reports
+    names=[f'p{i}' for i in range(22)]
+    b=catalog['A']; normal=pin_markers(b,names)
+    assert len(normal)==22
+    assert all(x==350 for _,x,y in normal[:11])
+    assert all(y==2585 for _,x,y in normal[11:])
+    assert normal[0][2]<normal[10][2] and normal[11][1]<normal[21][1]
+    for mx,my in [(True,False),(False,True),(True,True)]:
+        assert pin_markers(b,names,mx,my)==[(n,2935-x if mx else x,2935-y if my else y) for n,x,y in normal]
+    assert len(pin_markers(b,names+['excess']))==22

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from PySide6.QtCore import Qt, QRectF, QMimeData, QTimer, QPointF
 from PySide6.QtGui import QAction, QColor, QPen, QBrush, QPainterPath, QTransform, QDrag, QPainter, QImage, QKeySequence
-from PySide6.QtWidgets import (QMainWindow,QWidget,QHBoxLayout,QVBoxLayout,QLineEdit,QListWidget,QListWidgetItem,QGraphicsView,QGraphicsScene,QGraphicsItem,QGraphicsRectItem,QGraphicsSimpleTextItem,QTextEdit,QSplitter,QInputDialog,QFileDialog,QMessageBox,QCheckBox,QSpinBox,QLabel)
+from PySide6.QtWidgets import (QMainWindow,QWidget,QHBoxLayout,QVBoxLayout,QLineEdit,QListWidget,QListWidgetItem,QGraphicsView,QGraphicsScene,QGraphicsItem,QGraphicsRectItem,QGraphicsEllipseItem,QGraphicsSimpleTextItem,QTextEdit,QSplitter,QInputDialog,QFileDialog,QMessageBox,QCheckBox,QSpinBox,QLabel)
 from PySide6.QtSvg import QSvgGenerator
 from ..models import Plan, Project, Frame, Placement, load_catalog, CONFIG
 from ..transforms import bounds, occupied
@@ -14,6 +14,7 @@ from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 from ..gds_audit import load_actual_sizes
+from ..project_pins import load_project_pins, pin_markers
 
 class Palette(QListWidget):
     def startDrag(self, actions):
@@ -132,6 +133,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.actual_sizes,self.audit_reports=load_actual_sizes()
+        self.project_pins,self.pin_reports=load_project_pins()
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
         self.export_control_directory=EXPORT_CONTROL_DIRECTORY
@@ -152,7 +154,7 @@ class MainWindow(QMainWindow):
             menu.addAction(action)
             if text in ('Save','Add Project','Add Frame','Mirror X','Mirror Y','Undo','Redo','Fit View'): toolbar.addAction(action)
         self.refresh(); self.view.fit()
-        if self.audit_reports: self.statusBar().showMessage('; '.join(self.audit_reports))
+        if self.audit_reports or self.pin_reports: self.statusBar().showMessage('; '.join(self.audit_reports+self.pin_reports))
     def guarded(self,fn):
         try: fn()
         except Exception as e: QMessageBox.warning(self,'Unable to complete action',str(e))
@@ -205,6 +207,11 @@ class MainWindow(QMainWindow):
                     actual_box.setPen(QPen(QColor('white'),8))
                     actual_box.setBrush(QBrush(Qt.NoBrush))
                     actual_box.setToolTip(f'Actual GDS size: {width:g} × {height:g} µm')
+                names=self.project_pins.get(p.project_id.upper(),[])
+                for name,x,y in pin_markers(b,names,p.mirror_x,p.mirror_y):
+                    dot=QGraphicsEllipseItem(x-15,y-15,30,30,item)
+                    dot.setBrush(QColor('#ffe28a')); dot.setPen(QPen(QColor('#101c29'),3))
+                    dot.setZValue(3); dot.setToolTip(name)
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
                 label.setBrush(QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
@@ -224,6 +231,10 @@ class MainWindow(QMainWindow):
         if pl:
             r=bounds(b,pl.mirror_x,pl.mirror_y); pins,verified=mapped_pins(b,pl.mirror_x,pl.mirror_y,f.pads); es,ws=validate(self.plan,f,pl,self.catalog)
             lines += [f'Current lower-left: ({r.x}, {r.y})',f'Mirror X: {pl.mirror_x}; Y: {pl.mirror_y}',f'Pads ({"verified" if verified else "UNVERIFIED"}): '+', '.join(pins),'Validation: '+('; '.join(es+ws) or 'Valid')]
+        names=self.project_pins.get(p.id.upper())
+        if names is not None:
+            lines += [f'YAML pins: {len(names)}; displayed: {min(len(names),b.pin_count)}']
+            if len(names)>b.pin_count: lines += ['WARNING: YAML pin count exceeds block capacity; excess pins have no marker.']
         actual=self.actual_sizes.get(p.id.upper())
         lines += [f'Actual GDS size: {actual[0]:g} × {actual[1]:g} µm' if actual else 'Actual GDS size: unavailable']
         if b.area!=b.source_area_um2: lines+=['WARNING: source and calculated areas differ.']

@@ -178,3 +178,15 @@ def test_actual_size_box_is_centered_and_to_scale(window):
         assert box.rect().center()==block.path().boundingRect().center()
         assert box.pen().color()==QColor('white')
         assert '603.13 × 269.59 µm' in w.inspector.toPlainText()
+
+def test_pin_dots_reflect_and_show_names(window):
+    from PySide6.QtWidgets import QGraphicsEllipseItem
+    w=window; w.project_pins={'P01':['VSS','VDD']}; w.plan.projects=[Project('P01')]
+    positions=[]
+    for mx in (False,True):
+        w.plan.frames[0].placements=[Placement('P01','A',mx,False)]; w.refresh()
+        block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+        dots=[i for i in block.childItems() if isinstance(i,QGraphicsEllipseItem)]
+        assert {d.toolTip() for d in dots}=={'VSS','VDD'}
+        positions.append(sorted(d.rect().center().x() for d in dots))
+    assert positions==[[350,350],[2585,2585]]
