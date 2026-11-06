@@ -58,6 +58,7 @@ class Frame:
 
 @dataclass
 class Plan:
+    project_metadata: dict = field(default_factory=dict, kw_only=True)
     projects: list[Project] = field(default_factory=list)
     frames: list[Frame] = field(default_factory=list)
 

@@ -1,4 +1,4 @@
-"""Export-control document presence is read from disk, never persisted in plans."""
+"""Read local export-control document presence for portable plan snapshots."""
 from pathlib import Path
 import re
 

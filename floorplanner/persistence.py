@@ -7,6 +7,22 @@ from .models import Plan,Project,Frame,Placement,config_hash
 from .validation import validate_all
 from .pin_mapping import validate_pad_catalog
 
+def validate_metadata(metadata):
+    import math
+    if not isinstance(metadata,dict): raise ValueError('Invalid project metadata')
+    for code,entry in metadata.items():
+        if not isinstance(code,str) or not isinstance(entry,dict): raise ValueError('Invalid project metadata entry')
+        if 'actual_size_um' in entry:
+            size=entry['actual_size_um']
+            if not isinstance(size,list) or len(size)!=2 or any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in size):
+                raise ValueError('Invalid actual size')
+        if 'export_control' in entry and type(entry['export_control']) is not bool: raise ValueError('Invalid export control status')
+        if 'pins' in entry:
+            if not isinstance(entry['pins'],list): raise ValueError('Invalid saved pins')
+            for pin in entry['pins']:
+                if not isinstance(pin,dict) or not isinstance(pin.get('name'),str) or not isinstance(pin.get('io_type'),str): raise ValueError('Invalid saved pin')
+
+
 def dumps(plan,catalog):
     return json.dumps(dict(schema_version=1,chip_type='gf180mcuD',configuration_hash=config_hash(catalog),**asdict(plan)),indent=2)
 
@@ -30,7 +46,9 @@ def loads(text,catalog):
             if not isinstance(pad.get('id'),str) or any(type(pad.get(k)) is not int for k in ('x_um','y_um')): raise ValueError('Invalid pad coordinates')
     for p in projects:
         if not p.id or (p.block_type not in catalog and p.block_type!='?'): raise ValueError('Invalid project or block type')
-    plan=Plan(projects,frames)
+    metadata=data.get('project_metadata',{})
+    validate_metadata(metadata)
+    plan=Plan(projects,frames,project_metadata=metadata)
     errors=[f'{p.project_id}: {e}' for f,p,es,ws in validate_all(plan,catalog) for e in es]
     if errors: raise ValueError('\n'.join(errors))
     return plan

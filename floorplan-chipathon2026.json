@@ -1,0 +1,789 @@
+{
+  "schema_version": 1,
+  "chip_type": "gf180mcuD",
+  "configuration_hash": "de3acca425fa14921eb485f0fcb087be049dd9262abc5413ab34fe17f1e30d4f",
+  "projects": [
+    {
+      "id": "A01",
+      "name": "A01",
+      "block_type": "D",
+      "pin_count": 12,
+      "shared_nets": {}
+    },
+    {
+      "id": "A02",
+      "name": "A02",
+      "block_type": "A",
+      "pin_count": 22,
+      "shared_nets": {}
+    },
+    {
+      "id": "A06",
+      "name": "A06",
+      "block_type": "BH",
+      "pin_count": 16,
+      "shared_nets": {}
+    },
+    {
+      "id": "A07",
+      "name": "A07",
+      "block_type": "A",
+      "pin_count": 14,
+      "shared_nets": {}
+    },
+    {
+      "id": "A09",
+      "name": "A09",
+      "block_type": "BV",
+      "pin_count": 13,
+      "shared_nets": {}
+    },
+    {
+      "id": "A10",
+      "name": "A10",
+      "block_type": "CV2",
+      "pin_count": 8,
+      "shared_nets": {}
+    },
+    {
+      "id": "A12",
+      "name": "A12",
+      "block_type": "ACE",
+      "pin_count": 150,
+      "shared_nets": {}
+    },
+    {
+      "id": "A13",
+      "name": "A13",
+      "block_type": "BV",
+      "pin_count": 14,
+      "shared_nets": {}
+    },
+    {
+      "id": "A19",
+      "name": "A19",
+      "block_type": "ACE",
+      "pin_count": 52,
+      "shared_nets": {}
+    },
+    {
+      "id": "A20",
+      "name": "A20",
+      "block_type": "BH",
+      "pin_count": 9,
+      "shared_nets": {}
+    },
+    {
+      "id": "A23",
+      "name": "A23",
+      "block_type": "?",
+      "pin_count": 18,
+      "shared_nets": {}
+    },
+    {
+      "id": "A28",
+      "name": "A28",
+      "block_type": "D",
+      "pin_count": 11,
+      "shared_nets": {}
+    },
+    {
+      "id": "A30",
+      "name": "A30",
+      "block_type": "A",
+      "pin_count": 18,
+      "shared_nets": {}
+    },
+    {
+      "id": "A34",
+      "name": "A34",
+      "block_type": "ACE",
+      "pin_count": 16,
+      "shared_nets": {}
+    },
+    {
+      "id": "A37",
+      "name": "A37",
+      "block_type": "A",
+      "pin_count": 6,
+      "shared_nets": {}
+    },
+    {
+      "id": "A40",
+      "name": "A40",
+      "block_type": "ACV",
+      "pin_count": 27,
+      "shared_nets": {}
+    },
+    {
+      "id": "A43",
+      "name": "A43",
+      "block_type": "BHE",
+      "pin_count": 10,
+      "shared_nets": {}
+    },
+    {
+      "id": "A44",
+      "name": "A44",
+      "block_type": "A",
+      "pin_count": 15,
+      "shared_nets": {}
+    },
+    {
+      "id": "A45",
+      "name": "A45",
+      "block_type": "A",
+      "pin_count": 22,
+      "shared_nets": {}
+    },
+    {
+      "id": "A48",
+      "name": "A48",
+      "block_type": "EH2",
+      "pin_count": 9,
+      "shared_nets": {}
+    },
+    {
+      "id": "A49",
+      "name": "A49",
+      "block_type": "BV",
+      "pin_count": 14,
+      "shared_nets": {}
+    },
+    {
+      "id": "A52",
+      "name": "A52",
+      "block_type": "D",
+      "pin_count": 85,
+      "shared_nets": {}
+    },
+    {
+      "id": "A53",
+      "name": "A53",
+      "block_type": "BV",
+      "pin_count": 10,
+      "shared_nets": {}
+    },
+    {
+      "id": "A54",
+      "name": "A54",
+      "block_type": "A",
+      "pin_count": 22,
+      "shared_nets": {}
+    },
+    {
+      "id": "A56",
+      "name": "A56",
+      "block_type": "ACV",
+      "pin_count": 11,
+      "shared_nets": {}
+    },
+    {
+      "id": "A58",
+      "name": "A58",
+      "block_type": "ACE",
+      "pin_count": 9,
+      "shared_nets": {}
+    },
+    {
+      "id": "A63",
+      "name": "A63",
+      "block_type": "BV",
+      "pin_count": 12,
+      "shared_nets": {}
+    },
+    {
+      "id": "A64",
+      "name": "A64",
+      "block_type": "EH2",
+      "pin_count": 8,
+      "shared_nets": {}
+    },
+    {
+      "id": "A66",
+      "name": "A66",
+      "block_type": "EH2",
+      "pin_count": 10,
+      "shared_nets": {}
+    },
+    {
+      "id": "A68",
+      "name": "A68",
+      "block_type": "CH2",
+      "pin_count": 8,
+      "shared_nets": {}
+    },
+    {
+      "id": "A71",
+      "name": "A71",
+      "block_type": "D",
+      "pin_count": 12,
+      "shared_nets": {}
+    },
+    {
+      "id": "B02",
+      "name": "B02",
+      "block_type": "ACE",
+      "pin_count": 28,
+      "shared_nets": {}
+    },
+    {
+      "id": "B04",
+      "name": "B04",
+      "block_type": "A",
+      "pin_count": 10,
+      "shared_nets": {}
+    },
+    {
+      "id": "B05",
+      "name": "B05",
+      "block_type": "D",
+      "pin_count": 70,
+      "shared_nets": {}
+    },
+    {
+      "id": "B07",
+      "name": "B07",
+      "block_type": "?",
+      "pin_count": 19,
+      "shared_nets": {}
+    },
+    {
+      "id": "B08",
+      "name": "B08",
+      "block_type": "D",
+      "pin_count": 11,
+      "shared_nets": {}
+    },
+    {
+      "id": "B11",
+      "name": "B11",
+      "block_type": "?",
+      "pin_count": 22,
+      "shared_nets": {}
+    },
+    {
+      "id": "B12",
+      "name": "B12",
+      "block_type": "D",
+      "pin_count": 9,
+      "shared_nets": {}
+    },
+    {
+      "id": "B14",
+      "name": "B14",
+      "block_type": "BVE",
+      "pin_count": 18,
+      "shared_nets": {}
+    },
+    {
+      "id": "B18",
+      "name": "B18",
+      "block_type": "A",
+      "pin_count": 19,
+      "shared_nets": {}
+    },
+    {
+      "id": "B22",
+      "name": "B22",
+      "block_type": "A",
+      "pin_count": 14,
+      "shared_nets": {}
+    },
+    {
+      "id": "B23",
+      "name": "B23",
+      "block_type": "BV",
+      "pin_count": 13,
+      "shared_nets": {}
+    },
+    {
+      "id": "B24",
+      "name": "B24",
+      "block_type": "?",
+      "pin_count": 18,
+      "shared_nets": {}
+    },
+    {
+      "id": "B26",
+      "name": "B26",
+      "block_type": "ACE",
+      "pin_count": 46,
+      "shared_nets": {}
+    },
+    {
+      "id": "B29",
+      "name": "B29",
+      "block_type": "?",
+      "pin_count": 0,
+      "shared_nets": {}
+    },
+    {
+      "id": "C01",
+      "name": "C01",
+      "block_type": "A",
+      "pin_count": 18,
+      "shared_nets": {}
+    },
+    {
+      "id": "C04",
+      "name": "C04",
+      "block_type": "?",
+      "pin_count": 13,
+      "shared_nets": {}
+    },
+    {
+      "id": "D03",
+      "name": "D03",
+      "block_type": "ACH",
+      "pin_count": 23,
+      "shared_nets": {}
+    },
+    {
+      "id": "D04",
+      "name": "D04",
+      "block_type": "D",
+      "pin_count": 6,
+      "shared_nets": {}
+    },
+    {
+      "id": "D05",
+      "name": "D05",
+      "block_type": "EV2",
+      "pin_count": 5,
+      "shared_nets": {}
+    },
+    {
+      "id": "D08",
+      "name": "D08",
+      "block_type": "BV",
+      "pin_count": 16,
+      "shared_nets": {}
+    },
+    {
+      "id": "D10",
+      "name": "D10",
+      "block_type": "D",
+      "pin_count": 9,
+      "shared_nets": {}
+    },
+    {
+      "id": "D14",
+      "name": "D14",
+      "block_type": "D",
+      "pin_count": 10,
+      "shared_nets": {}
+    },
+    {
+      "id": "D15",
+      "name": "D15",
+      "block_type": "A",
+      "pin_count": 22,
+      "shared_nets": {}
+    },
+    {
+      "id": "D16",
+      "name": "D16",
+      "block_type": "A",
+      "pin_count": 18,
+      "shared_nets": {}
+    }
+  ],
+  "frames": [
+    {
+      "id": "chip_01",
+      "name": "Chip 1",
+      "canvas_position": [
+        0,
+        9500
+      ],
+      "placements": [
+        {
+          "project_id": "A40",
+          "block_type": "ACV",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A09",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A30",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "B18",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": true
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_02",
+      "name": "Chip 2",
+      "canvas_position": [
+        3500,
+        9500
+      ],
+      "placements": [
+        {
+          "project_id": "A44",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B04",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A07",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "C01",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": true
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_03",
+      "name": "Chip 3",
+      "canvas_position": [
+        7000,
+        9500
+      ],
+      "placements": [
+        {
+          "project_id": "D03",
+          "block_type": "ACH",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A54",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A37",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "D04",
+          "block_type": "D",
+          "mirror_x": false,
+          "mirror_y": true
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_04",
+      "name": "Chip 4",
+      "canvas_position": [
+        10500,
+        9500
+      ],
+      "placements": [
+        {
+          "project_id": "A34",
+          "block_type": "ACE",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A63",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B12",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A06",
+          "block_type": "BH",
+          "mirror_x": false,
+          "mirror_y": true
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_05",
+      "name": "Chip 5",
+      "canvas_position": [
+        0,
+        6000
+      ],
+      "placements": [
+        {
+          "project_id": "A02",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A10",
+          "block_type": "CV2",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A13",
+          "block_type": "BV",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A49",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A45",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_06",
+      "name": "Chip 6",
+      "canvas_position": [
+        3500,
+        6000
+      ],
+      "placements": [
+        {
+          "project_id": "D15",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "D16",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "D14",
+          "block_type": "D",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "D05",
+          "block_type": "EV2",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A53",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": true
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_07",
+      "name": "Chip 7",
+      "canvas_position": [
+        7000,
+        6000
+      ],
+      "placements": [
+        {
+          "project_id": "A56",
+          "block_type": "ACV",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A64",
+          "block_type": "EH2",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B08",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "D10",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "D08",
+          "block_type": "BV",
+          "mirror_x": false,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_08",
+      "name": "Chip 8",
+      "canvas_position": [
+        10500,
+        6000
+      ],
+      "placements": [
+        {
+          "project_id": "A68",
+          "block_type": "CH2",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A20",
+          "block_type": "BH",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A01",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A43",
+          "block_type": "BHE",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "B22",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_09",
+      "name": "Chip 9",
+      "canvas_position": [
+        0,
+        2500
+      ],
+      "placements": [
+        {
+          "project_id": "B02",
+          "block_type": "ACE",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B14",
+          "block_type": "BVE",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_10",
+      "name": "Chip 10",
+      "canvas_position": [
+        3500,
+        2500
+      ],
+      "placements": [
+        {
+          "project_id": "A66",
+          "block_type": "EH2",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A28",
+          "block_type": "D",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A48",
+          "block_type": "EH2",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A71",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_11",
+      "name": "Chip 11",
+      "canvas_position": [
+        7000,
+        2500
+      ],
+      "placements": [
+        {
+          "project_id": "B23",
+          "block_type": "BV",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A58",
+          "block_type": "ACE",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_12",
+      "name": "Chip 12",
+      "canvas_position": [
+        10500,
+        2500
+      ],
+      "placements": [],
+      "pads": []
+    }
+  ]
+}

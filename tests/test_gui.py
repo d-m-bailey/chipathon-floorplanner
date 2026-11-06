@@ -10,8 +10,8 @@ from floorplanner.models import Project,Placement
 def app():return QApplication.instance() or QApplication([])
 
 @pytest.fixture
-def window(app):
-    w=MainWindow(); w.show(); app.processEvents(); yield w
+def window(app,tmp_path):
+    w=MainWindow(); w.actual_sizes={}; w.project_pins={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
     w.dirty=False; w.close()
 
 def test_gui_drag_and_undo(window,app):
@@ -119,7 +119,7 @@ def test_startup_file_loading(window,tmp_path):
     with pytest.raises(ValueError): window.load_file(bad,record_history=False)
     assert window.plan==plan and window.path==str(path.resolve())
 
-def test_export_control_status_is_live_and_not_saved(window,tmp_path):
+def test_export_control_status_is_live_and_saved(window,tmp_path):
     from PySide6.QtGui import QColor
     from floorplanner.persistence import dumps
     w=window; w.export_control_directory=tmp_path
@@ -141,7 +141,8 @@ def test_export_control_status_is_live_and_not_saved(window,tmp_path):
     assert block().pen().color()==QColor('white')
     doc.unlink(); w.refresh()
     assert block().pen().color()==QColor('#ff3030')
-    assert dumps(w.plan,w.catalog)==serialized
+    assert w.plan.project_metadata['A01']['export_control'] is False
+    assert 'export_control' in dumps(w.plan,w.catalog)
 
 def test_double_click_block_opens_project_editor(window,app,monkeypatch):
     from PySide6.QtTest import QTest
@@ -230,3 +231,24 @@ def test_pin_label_angle_tracks_single_axis_reflection(window):
         assert label.background==dot.brush().color()
         # Y inversion for screen readability reverses the transform's slope.
         assert label.transform().m12()/label.transform().m11()==pytest.approx(1 if mx!=my else -1)
+
+def test_json_only_metadata_renders_without_local_sources(window,tmp_path):
+    from floorplanner.models import Plan,Frame
+    from floorplanner.persistence import save
+    from PySide6.QtWidgets import QGraphicsEllipseItem,QGraphicsRectItem
+    from PySide6.QtGui import QColor
+    metadata={'P01':{'actual_size_um':[603.13,269.59],'export_control':True,'pins':[{'name':'VSS','io_type':'ground'}]}}
+    plan=Plan([Project('P01')],[Frame('f',placements=[Placement('P01','A')])],project_metadata=metadata)
+    path=tmp_path/'portable.json'; save(path,plan,window.catalog)
+    window.load_file(path,record_history=False)
+    assert window.plan.project_metadata==metadata and not window.dirty
+    block=next(i for i in window.frame_items[0].childItems() if i.data(0)=='P01')
+    assert any(isinstance(i,QGraphicsRectItem) and i.rect().width()==pytest.approx(603.13) for i in block.childItems())
+    assert any(isinstance(i,QGraphicsEllipseItem) and i.brush().color()==QColor('black') for i in block.childItems())
+    assert 'Missing export control' not in window.palette.item(0).toolTip()
+    # Local sources refresh saved information when present.
+    window.actual_sizes={'P01':(700,300)}; window.project_pins={'P01':[{'name':'VDD','io_type':'power'}]}
+    window.export_control_directory=tmp_path/'documents'; window.export_control_directory.mkdir()
+    window.refresh()
+    assert window.dirty
+    assert window.plan.project_metadata['P01']=={'actual_size_um':[700,300],'export_control':False,'pins':[{'name':'VDD','io_type':'power'}]}

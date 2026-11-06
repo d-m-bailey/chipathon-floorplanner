@@ -183,8 +183,26 @@ class MainWindow(QMainWindow):
         except Exception as e: QMessageBox.warning(self,'Unable to complete action',str(e))
     def checkpoint(self):
         self.undo_stack.append(copy.deepcopy(self.plan)); self.redo_stack.clear(); self.dirty=True
+    def sync_metadata(self):
+        documented=documented_projects(self.export_control_directory) if self.export_control_directory.is_dir() else None
+        changed=False
+        for p in self.plan.projects:
+            code=p.id.upper()
+            entry=dict(self.plan.project_metadata.get(code,{}))
+            if code in self.actual_sizes: entry['actual_size_um']=list(self.actual_sizes[code])
+            if code in self.project_pins:
+                entry['pins']=[dict(pin) if isinstance(pin,dict) else {'name':pin,'io_type':'unknown'} for pin in self.project_pins[code]]
+            if documented is not None: entry['export_control']=code in documented
+            if entry and entry!=self.plan.project_metadata.get(code):
+                self.plan.project_metadata[code]=entry; changed=True
+        if changed: self.dirty=True
+
+    def documented_codes(self):
+        return {code for code,entry in self.plan.project_metadata.items() if entry.get('export_control',False)}
+
     def refresh_palette(self):
-        documented=documented_projects(self.export_control_directory)
+        self.sync_metadata()
+        documented=self.documented_codes()
         selected=self.selected; self.palette.blockSignals(True); self.palette.clear()
         for p in self.plan.projects:
             if self.search.text().lower() not in (p.id+' '+p.name).lower(): continue
@@ -209,7 +227,8 @@ class MainWindow(QMainWindow):
         self.view.preview=None; self.view.candidate=None; self.view.scene().clear()
         # Keep Python subclasses alive while Qt dispatches mouse events.
         self.frame_items=[]
-        documented=documented_projects(self.export_control_directory)
+        self.sync_metadata()
+        documented=self.documented_codes()
         for f in self.plan.frames:
             frame_item=FrameItem(f,self); self.frame_items.append(frame_item); self.view.scene().addItem(frame_item)
             project_ids=sorted(p.project_id for p in f.placements)
@@ -223,14 +242,14 @@ class MainWindow(QMainWindow):
                 item=self.view.scene().addPath(path,QPen(outline,20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
-                actual=self.actual_sizes.get(p.project_id.upper())
+                actual=self.plan.project_metadata.get(p.project_id.upper(),{}).get('actual_size_um')
                 if actual:
                     width,height=actual; cx,cy=r.center
                     actual_box=QGraphicsRectItem(cx-width/2,cy-height/2,width,height,item)
                     actual_box.setPen(QPen(QColor('white'),8))
                     actual_box.setBrush(QBrush(Qt.NoBrush))
                     actual_box.setToolTip(f'Actual GDS size: {width:g} × {height:g} µm')
-                names=self.project_pins.get(p.project_id.upper(),[])
+                names=self.plan.project_metadata.get(p.project_id.upper(),{}).get('pins',[])
                 for pin,(name,x,y) in zip(names,pin_markers(b,names,p.mirror_x,p.mirror_y)):
                     dot=QGraphicsEllipseItem(x-15,y-15,30,30,item)
                     io_type=pin.get('io_type','unknown') if isinstance(pin,dict) else 'unknown'
@@ -258,11 +277,11 @@ class MainWindow(QMainWindow):
         if pl:
             r=bounds(b,pl.mirror_x,pl.mirror_y); pins,verified=mapped_pins(b,pl.mirror_x,pl.mirror_y,f.pads); es,ws=validate(self.plan,f,pl,self.catalog)
             lines += [f'Current lower-left: ({r.x}, {r.y})',f'Mirror X: {pl.mirror_x}; Y: {pl.mirror_y}',f'Pads ({"verified" if verified else "UNVERIFIED"}): '+', '.join(pins),'Validation: '+('; '.join(es+ws) or 'Valid')]
-        names=self.project_pins.get(p.id.upper())
+        names=self.plan.project_metadata.get(p.id.upper(),{}).get('pins')
         if names is not None:
             lines += [f'YAML pins: {len(names)}; displayed: {min(len(names),b.pin_count)}']
             if len(names)>b.pin_count: lines += ['WARNING: YAML pin count exceeds block capacity; excess pins have no marker.']
-        actual=self.actual_sizes.get(p.id.upper())
+        actual=self.plan.project_metadata.get(p.id.upper(),{}).get('actual_size_um')
         lines += [f'Actual GDS size: {actual[0]:g} × {actual[1]:g} µm' if actual else 'Actual GDS size: unavailable']
         if b.area!=b.source_area_um2: lines+=['WARNING: source and calculated areas differ.']
         self.inspector.setPlainText('\n\n'.join(lines))
@@ -362,6 +381,7 @@ class MainWindow(QMainWindow):
         path=self.path
         if not path or save_as:path,_=QFileDialog.getSaveFileName(self,'Save floorplan',path or 'floorplan.json','JSON (*.json)')
         if not path:return False
+        self.sync_metadata()
         save(path,self.plan,self.catalog); self.path=path; self.dirty=False; self.refresh(); return True
     def export(self,kind):
         path,_=QFileDialog.getSaveFileName(self,'Export canvas',f'floorplan.{kind}',f'{kind.upper()} (*.{kind})')
