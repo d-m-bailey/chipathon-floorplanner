@@ -27,7 +27,7 @@ def app():return QApplication.instance() or QApplication([])
 
 @pytest.fixture
 def window(app,tmp_path):
-    w=MainWindow(); w.actual_sizes={}; w.project_pins={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
+    w=MainWindow(); w.actual_sizes={}; w.project_pins={}; w.project_types={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
     w.dirty=False; w.close()
 
 def test_gui_drag_and_undo(window,app):
@@ -285,3 +285,18 @@ def test_export_control_updates_only_with_available_directory(window,tmp_path,so
     saved=loads((tmp_path/'saved.json').read_text(),w.catalog)
     expected={'P01':False,'P02':True} if source in ('directory','link') else {'P01':True,'P02':False}
     assert {code:entry['export_control'] for code,entry in saved.project_metadata.items()}==expected
+
+def test_design_type_label_is_inset_bottom_center_and_portable(window):
+    from PySide6.QtWidgets import QGraphicsSimpleTextItem
+    from floorplanner.persistence import loads,dumps
+    from floorplanner.transforms import bounds
+    w=window; w.plan.projects=[Project('P01')]; w.project_types={'P01':'MIX'}
+    for mx,my in [(False,False),(True,False),(False,True),(True,True)]:
+        w.plan.frames[0].placements=[Placement('P01','A',mx,my)]; w.refresh()
+        block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+        label=next(i for i in block.childItems() if isinstance(i,QGraphicsSimpleTextItem) and i.text()=='MIX')
+        center=label.mapToParent(label.boundingRect().center()); rect=bounds(w.catalog['A'],mx,my)
+        assert center.x()==pytest.approx(rect.center[0])
+        assert center.y()==pytest.approx(rect.y+160)
+    w.plan=loads(dumps(w.plan,w.catalog),w.catalog); w.project_types={}; w.refresh()
+    assert w.plan.project_metadata['P01']['design_type']=='MIX'
