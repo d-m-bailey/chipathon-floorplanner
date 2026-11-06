@@ -115,3 +115,10 @@ Copyright 2026 D. Mitch Bailey. Licensed under the [Apache License, Version 2.0]
 Source and documentation carry license headers. JSON files use adjacent `.license` notices to preserve valid JSON. External data and audit symlinks retain their original ownership and licensing.
 
 The audit CSV `type` column supplies project classification: Digital → DIG, Analog → ANA, Mixed signal → MIX. This code appears centered 160 µm above the bottom edge of each placed block, inset from pin labels. It is stored as `design_type` in portable project metadata and retained when the audit is unavailable. Unrecognized or missing types are left unlabeled.
+
+
+## Chip assembly YAML export
+
+Choose **Floorplan → Export Chip YAML** and select an output directory. Every frame produces `IEEE<n>.yaml`, including empty frames (`projects: []`). Existing files with those names are replaced atomically. Frame IDs such as `chip_01` determine the number; custom IDs use frame order. Chip names are `SSCS_2026_<nn>`.
+
+The schema matches the IEEE examples: version 2, `base_chip: chipathon2026_gf180mcu_202609.yaml`, and `minimum_project_gap_um: 10`. Each placement contributes `team`, `variant`, and `quadrant`. Normal/X/Y/XY map to NW/NE/SW/SE; multiple projects may share a quadrant. Canvas frame positions and unassigned projects are omitted. Invalid placements prevent export. The referenced base-chip YAML must be available to the downstream assembly tool.

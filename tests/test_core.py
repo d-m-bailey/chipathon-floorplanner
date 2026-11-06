@@ -168,3 +168,17 @@ def test_audit_project_types(tmp_path):
     path.write_text('Team,type\nA01,Digital\nA02,Analog\nA03,Mixed signal\nA04,Mixed-signal\nA05,unknown\n')
     assert load_project_types(path)=={'A01':'DIG','A02':'ANA','A03':'MIX','A04':'MIX'}
     assert load_project_types(tmp_path/'absent.csv')=={}
+
+def test_chip_yaml_samples(catalog,tmp_path):
+    import yaml
+    from floorplanner.chip_yaml import chip_documents,export_chip_yaml
+    projects=[Project('P1'),Project('P2'),Project('P3'),Project('P4')]
+    placements=[Placement(p.id,'A',mx,my) for p,(mx,my) in zip(projects,[(False,False),(True,False),(True,True),(False,True)])]
+    plan=Plan(projects,[Frame('chip_01',placements=placements),Frame('chip_02')])
+    docs=chip_documents(plan,catalog)
+    assert docs['IEEE1.yaml']=={'schema_version':2,'base_chip':'chipathon2026_gf180mcu_202609.yaml','chip':{'name':'SSCS_2026_01','minimum_project_gap_um':10},'projects':[{'team':f'P{i}','variant':'A','quadrant':q} for i,q in enumerate(['NW','NE','SE','SW'],1)]}
+    paths=export_chip_yaml(tmp_path,plan,catalog)
+    assert len(paths)==2
+    assert yaml.safe_load(paths[0].read_text())==docs['IEEE1.yaml']
+    assert yaml.safe_load(paths[1].read_text())['projects']==[]
+    export_chip_yaml(tmp_path,plan,catalog)

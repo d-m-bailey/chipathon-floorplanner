@@ -29,6 +29,7 @@ from ..pin_mapping import mapped_pins
 from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
+from ..chip_yaml import export_chip_yaml
 from ..gds_audit import load_actual_sizes, load_project_types
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
@@ -186,7 +187,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(QLabel('Maximum snap distance (pixels)')); self.snap_distance=QSpinBox(); self.snap_distance.setRange(10,1000); self.snap_distance.setValue(180); layout.addWidget(self.snap_distance)
         splitter.addWidget(left); self.view=View(self); splitter.addWidget(self.view)
         self.inspector=QTextEdit(); self.inspector.setReadOnly(True); splitter.addWidget(self.inspector); splitter.setSizes([260,900,280])
-        actions=[('New',self.new,QKeySequence.New),('Open',self.open,QKeySequence.Open),('Save',self.save_plan,QKeySequence.Save),('Save As',lambda:self.save_plan(True),QKeySequence.SaveAs),('Add Project',self.add_project,None),('Edit Project',self.edit_project,None),('Import Projects',self.import_yaml,None),('Add Frame',self.add_frame,None),('Rename Frame',self.rename_frame,None),('Remove Frame',self.remove_frame,None),('Load Pads',self.load_pads,None),('Mirror X',lambda:self.mirror('x'),'X'),('Mirror Y',lambda:self.mirror('y'),'Y'),('Unassign',self.unassign,'Delete'),('Undo',self.undo,QKeySequence.Undo),('Redo',self.redo,QKeySequence.Redo),('Validate All',self.validate_plan,None),('Export SVG',lambda:self.export('svg'),None),('Export PNG',lambda:self.export('png'),None),('Fit View',self.view.fit,'F')]
+        actions=[('New',self.new,QKeySequence.New),('Open',self.open,QKeySequence.Open),('Save',self.save_plan,QKeySequence.Save),('Save As',lambda:self.save_plan(True),QKeySequence.SaveAs),('Add Project',self.add_project,None),('Edit Project',self.edit_project,None),('Import Projects',self.import_yaml,None),('Add Frame',self.add_frame,None),('Rename Frame',self.rename_frame,None),('Remove Frame',self.remove_frame,None),('Load Pads',self.load_pads,None),('Mirror X',lambda:self.mirror('x'),'X'),('Mirror Y',lambda:self.mirror('y'),'Y'),('Unassign',self.unassign,'Delete'),('Undo',self.undo,QKeySequence.Undo),('Redo',self.redo,QKeySequence.Redo),('Validate All',self.validate_plan,None),('Export Chip YAML',self.export_chips,None),('Export SVG',lambda:self.export('svg'),None),('Export PNG',lambda:self.export('png'),None),('Fit View',self.view.fit,'F')]
         menu=self.menuBar().addMenu('Floorplan'); toolbar=self.addToolBar('Plan')
         for text,fn,key in actions:
             action=QAction(text,self); action.triggered.connect(lambda checked=False,fn=fn: self.guarded(fn))
@@ -410,6 +411,12 @@ class MainWindow(QMainWindow):
         if not path:return False
         self.sync_metadata()
         save(path,self.plan,self.catalog); self.path=path; self.dirty=False; self.refresh(); return True
+    def export_chips(self):
+        directory=QFileDialog.getExistingDirectory(self,'Export one YAML file per chip')
+        if not directory:return
+        paths=export_chip_yaml(directory,self.plan,self.catalog)
+        self.statusBar().showMessage(f'Exported {len(paths)} chip YAML files to {directory}')
+
     def export(self,kind):
         path,_=QFileDialog.getSaveFileName(self,'Export canvas',f'floorplan.{kind}',f'{kind.upper()} (*.{kind})')
         if not path:return
