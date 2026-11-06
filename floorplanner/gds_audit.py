@@ -42,3 +42,17 @@ def load_actual_sizes(path=AUDIT_PATH):
                     reports.append(f'GDS audit row {line} ({code}): {error}')
     except OSError as error: reports.append(f'Unable to read GDS audit: {error}')
     return sizes,reports
+
+
+def load_project_types(path=AUDIT_PATH):
+    """Read type separately so missing/invalid dimensions do not hide classification."""
+    types={}
+    aliases={'digital':'DIG','analog':'ANA','mixed signal':'MIX','mixed-signal':'MIX','mixed_signal':'MIX'}
+    try:
+        with Path(path).open(newline='',encoding='utf-8-sig') as source:
+            for row in csv.DictReader(source):
+                code=(row.get('Team') or '').strip().upper()
+                kind=aliases.get((row.get('type') or '').strip().lower())
+                if code and kind: types[code]=kind
+    except OSError: pass
+    return types

@@ -29,7 +29,7 @@ from ..pin_mapping import mapped_pins
 from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
-from ..gds_audit import load_actual_sizes
+from ..gds_audit import load_actual_sizes, load_project_types
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
 class PinLabel(QGraphicsSimpleTextItem):
@@ -172,6 +172,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.actual_sizes,self.audit_reports=load_actual_sizes()
+        self.project_types=load_project_types()
         self.project_pins,self.pin_reports=load_project_pins()
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
@@ -206,6 +207,7 @@ class MainWindow(QMainWindow):
             code=p.id.upper()
             entry=dict(self.plan.project_metadata.get(code,{}))
             if code in self.actual_sizes: entry['actual_size_um']=list(self.actual_sizes[code])
+            if code in self.project_types: entry['design_type']=self.project_types[code]
             if code in self.project_pins:
                 entry['pins']=[dict(pin) if isinstance(pin,dict) else {'name':pin,'io_type':'unknown'} for pin in self.project_pins[code]]
             if documented is not None: entry['export_control']=code in documented
@@ -278,6 +280,15 @@ class MainWindow(QMainWindow):
                 label.setBrush(QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
                 label.setPos(r.x+35,r.y+r.h-40); label.setTransform(QTransform.fromScale(1,-1))
+                design_type=self.plan.project_metadata.get(p.project_id.upper(),{}).get('design_type')
+                if design_type:
+                    type_label=QGraphicsSimpleTextItem(design_type,item)
+                    type_label.setBrush(QColor('#101c29'))
+                    type_label.setFont(label.font())
+                    center=type_label.boundingRect().center()
+                    type_label.setTransform(QTransform().scale(label.scale(),-label.scale()).translate(-center.x(),-center.y()))
+                    type_label.setPos(r.center[0],r.y+160)
+                    type_label.setToolTip({'DIG':'Digital','ANA':'Analog','MIX':'Mixed-signal'}[design_type])
         self.refresh_palette(); self.inspect(); self.setWindowTitle(('● ' if self.dirty else '')+'Chipathon 2026 · '+(str(self.path) if self.path else 'Untitled'))
     def palette_selected(self,item,previous):
         if item: self.selected=item.data(Qt.UserRole); self.inspect()

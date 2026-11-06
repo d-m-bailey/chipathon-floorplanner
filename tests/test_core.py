@@ -161,3 +161,10 @@ def test_project_pin_markers(catalog,tmp_path):
     for mx,my in [(True,False),(False,True),(True,True)]:
         assert pin_markers(b,names,mx,my)==[(n,2935-x if mx else x,2935-y if my else y) for n,x,y in normal]
     assert len(pin_markers(b,names+['excess']))==22
+
+def test_audit_project_types(tmp_path):
+    from floorplanner.gds_audit import load_project_types
+    path=tmp_path/'audit.csv'
+    path.write_text('Team,type\nA01,Digital\nA02,Analog\nA03,Mixed signal\nA04,Mixed-signal\nA05,unknown\n')
+    assert load_project_types(path)=={'A01':'DIG','A02':'ANA','A03':'MIX','A04':'MIX'}
+    assert load_project_types(tmp_path/'absent.csv')=={}

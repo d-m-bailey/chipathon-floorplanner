@@ -58,7 +58,8 @@
           "io_type": "input_cmos"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "A02": {
       "actual_size_um": [
@@ -155,7 +156,8 @@
           "io_type": "input_schmitt"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A06": {
       "actual_size_um": [
@@ -228,7 +230,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A07": {
       "actual_size_um": [
@@ -293,7 +296,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A09": {
       "actual_size_um": [
@@ -354,7 +358,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A10": {
       "actual_size_um": [
@@ -395,7 +400,8 @@
           "io_type": "bidirectional_24ma"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A12": {
       "actual_size_um": [
@@ -492,7 +498,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "A13": {
       "actual_size_um": [
@@ -557,7 +564,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A19": {
       "actual_size_um": [
@@ -694,7 +702,8 @@
           "io_type": "input_cmos"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "MIX"
     },
     "A20": {
       "actual_size_um": [
@@ -739,7 +748,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A23": {
       "pins": [
@@ -841,7 +851,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "ANA"
     },
     "A30": {
       "actual_size_um": [
@@ -922,7 +933,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A34": {
       "actual_size_um": [
@@ -995,7 +1007,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A37": {
       "actual_size_um": [
@@ -1028,7 +1041,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A40": {
       "actual_size_um": [
@@ -1145,7 +1159,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A43": {
       "actual_size_um": [
@@ -1194,7 +1209,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A44": {
       "actual_size_um": [
@@ -1263,7 +1279,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "A45": {
       "actual_size_um": [
@@ -1360,7 +1377,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "A48": {
       "actual_size_um": [
@@ -1405,7 +1423,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "DIG"
     },
     "A49": {
       "actual_size_um": [
@@ -1470,7 +1489,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A52": {
       "actual_size_um": [
@@ -1531,7 +1551,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A53": {
       "actual_size_um": [
@@ -1580,7 +1601,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "A54": {
       "actual_size_um": [
@@ -1677,7 +1699,8 @@
           "io_type": "input_cmos"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A56": {
       "actual_size_um": [
@@ -1730,7 +1753,8 @@
           "io_type": "ground"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A58": {
       "actual_size_um": [
@@ -1775,7 +1799,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "DIG"
     },
     "A63": {
       "actual_size_um": [
@@ -1832,7 +1857,8 @@
           "io_type": "ground"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A64": {
       "actual_size_um": [
@@ -1873,7 +1899,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "A66": {
       "actual_size_um": [
@@ -1922,7 +1949,8 @@
           "io_type": "ground"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "MIX"
     },
     "A68": {
       "actual_size_um": [
@@ -1963,7 +1991,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "A71": {
       "actual_size_um": [
@@ -2020,7 +2049,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "DIG"
     },
     "B02": {
       "actual_size_um": [
@@ -2089,7 +2119,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "ANA"
     },
     "B04": {
       "actual_size_um": [
@@ -2138,7 +2169,8 @@
           "io_type": "input_cmos"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     },
     "B05": {
       "actual_size_um": [
@@ -2211,7 +2243,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "B07": {
       "pins": [
@@ -2345,7 +2378,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "B11": {
       "pins": [
@@ -2483,7 +2517,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "B14": {
       "actual_size_um": [
@@ -2564,7 +2599,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "ANA"
     },
     "B18": {
       "actual_size_um": [
@@ -2649,7 +2685,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "B22": {
       "actual_size_um": [
@@ -2714,7 +2751,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "B23": {
       "actual_size_um": [
@@ -2775,7 +2813,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": false
+      "export_control": false,
+      "design_type": "ANA"
     },
     "B24": {
       "pins": [
@@ -2913,7 +2952,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "B29": {
       "pins": [
@@ -3039,7 +3079,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "C04": {
       "pins": [
@@ -3197,7 +3238,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "D04": {
       "actual_size_um": [
@@ -3230,7 +3272,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "D05": {
       "actual_size_um": [
@@ -3259,7 +3302,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "D08": {
       "actual_size_um": [
@@ -3332,7 +3376,8 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "D10": {
       "actual_size_um": [
@@ -3377,7 +3422,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "D14": {
       "actual_size_um": [
@@ -3426,7 +3472,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "ANA"
     },
     "D15": {
       "actual_size_um": [
@@ -3523,7 +3570,8 @@
           "io_type": "power"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "DIG"
     },
     "D16": {
       "actual_size_um": [
@@ -3604,7 +3652,8 @@
           "io_type": "bidirectional"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "design_type": "MIX"
     }
   },
   "projects": [
@@ -4144,18 +4193,6 @@
       ],
       "placements": [
         {
-          "project_id": "A02",
-          "block_type": "A",
-          "mirror_x": true,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A10",
-          "block_type": "CV2",
-          "mirror_x": false,
-          "mirror_y": true
-        },
-        {
           "project_id": "A13",
           "block_type": "BV",
           "mirror_x": false,
@@ -4172,6 +4209,18 @@
           "block_type": "A",
           "mirror_x": false,
           "mirror_y": false
+        },
+        {
+          "project_id": "D16",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "D05",
+          "block_type": "EV2",
+          "mirror_x": false,
+          "mirror_y": true
         }
       ],
       "pads": []
@@ -4191,27 +4240,27 @@
           "mirror_y": false
         },
         {
-          "project_id": "D16",
+          "project_id": "A53",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A02",
           "block_type": "A",
           "mirror_x": false,
           "mirror_y": false
         },
         {
+          "project_id": "A10",
+          "block_type": "CV2",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
           "project_id": "D14",
           "block_type": "D",
           "mirror_x": false,
-          "mirror_y": true
-        },
-        {
-          "project_id": "D05",
-          "block_type": "EV2",
-          "mirror_x": false,
-          "mirror_y": true
-        },
-        {
-          "project_id": "A53",
-          "block_type": "BV",
-          "mirror_x": true,
           "mirror_y": true
         }
       ],
@@ -4244,15 +4293,15 @@
           "mirror_y": true
         },
         {
-          "project_id": "D10",
-          "block_type": "D",
-          "mirror_x": true,
-          "mirror_y": false
-        },
-        {
           "project_id": "D08",
           "block_type": "BV",
           "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A01",
+          "block_type": "D",
+          "mirror_x": true,
           "mirror_y": false
         }
       ],
@@ -4279,12 +4328,6 @@
           "mirror_y": false
         },
         {
-          "project_id": "A01",
-          "block_type": "D",
-          "mirror_x": true,
-          "mirror_y": true
-        },
-        {
           "project_id": "A43",
           "block_type": "BHE",
           "mirror_x": false,
@@ -4295,6 +4338,12 @@
           "block_type": "A",
           "mirror_x": true,
           "mirror_y": false
+        },
+        {
+          "project_id": "D10",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
         }
       ],
       "pads": []

@@ -33,6 +33,7 @@ def validate_metadata(metadata):
             if not isinstance(size,list) or len(size)!=2 or any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in size):
                 raise ValueError('Invalid actual size')
         if 'export_control' in entry and type(entry['export_control']) is not bool: raise ValueError('Invalid export control status')
+        if 'design_type' in entry and entry['design_type'] not in ('DIG','ANA','MIX'): raise ValueError('Invalid design type')
         if 'pins' in entry:
             if not isinstance(entry['pins'],list): raise ValueError('Invalid saved pins')
             for pin in entry['pins']:
