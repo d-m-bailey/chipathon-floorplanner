@@ -2,6 +2,3611 @@
   "schema_version": 1,
   "chip_type": "gf180mcuD",
   "configuration_hash": "de3acca425fa14921eb485f0fcb087be049dd9262abc5413ab34fe17f1e30d4f",
+  "project_metadata": {
+    "A01": {
+      "actual_size_um": [
+        603.13,
+        269.59
+      ],
+      "pins": [
+        {
+          "name": "VSSA",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDDA",
+          "io_type": "power"
+        },
+        {
+          "name": "IBIAS",
+          "io_type": "analog"
+        },
+        {
+          "name": "ISS",
+          "io_type": "analog"
+        },
+        {
+          "name": "VTUNE",
+          "io_type": "analog"
+        },
+        {
+          "name": "CP_OUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "Q_N",
+          "io_type": "analog"
+        },
+        {
+          "name": "I_N",
+          "io_type": "analog"
+        },
+        {
+          "name": "Q_P",
+          "io_type": "analog"
+        },
+        {
+          "name": "VSSD",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDDD",
+          "io_type": "power"
+        },
+        {
+          "name": "REF_IN",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": true
+    },
+    "A02": {
+      "actual_size_um": [
+        1088.38,
+        1086.7
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "data[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "data[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "addr[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "addr[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "addr[2]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "addr[3]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "irq",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "re",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "debug_state[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "debug_state[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "debug_state[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "we",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        }
+      ],
+      "export_control": true
+    },
+    "A06": {
+      "actual_size_um": [
+        1036.3,
+        537.9
+      ],
+      "pins": [
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_in0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_in1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_in2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_in3",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "load_row_or_col",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_ready",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_out0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_out1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_out2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_out3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "output_valid",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "output_ready",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A07": {
+      "actual_size_um": [
+        908.88,
+        905.28
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "a_bit",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "w_bit",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "start",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cont",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "P_minus1[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "P_minus1[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "P_minus1[2]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "y_bit",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "done",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "busy",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A09": {
+      "actual_size_um": [
+        507.66,
+        894.62
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_tx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_csn[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_csn[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_sck",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io[3]",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A10": {
+      "actual_size_um": [
+        1039.66,
+        1020.06
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "clk",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "sclk",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "mosi",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "cs_n",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "miso",
+          "io_type": "bidirectional_24ma"
+        }
+      ],
+      "export_control": true
+    },
+    "A12": {
+      "actual_size_um": [
+        1660.14,
+        1078.86
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "uart_tx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "gpio_0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_4",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_5",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_6",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_7",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_8",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_9",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_10",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_11",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_12",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_13",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_14",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_15",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A13": {
+      "actual_size_um": [
+        531.24,
+        687.49
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "RST_N",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "EOC",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_4",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_5",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_6",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BIT_7",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VIN",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "A19": {
+      "actual_size_um": [
+        2084.0,
+        2084.0
+      ],
+      "pins": [
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "W09_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "W10_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "W12_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "W13_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "W15_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "W16_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "a_valid_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "a_last_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "a_ready_o",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "b_valid_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "b_last_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "b_ready_o",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "N01_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "N02_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "N03_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "N04_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "data[0]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[1]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[2]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[3]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[4]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[5]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[6]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "data[7]",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "N13_NC",
+          "io_type": "analog"
+        },
+        {
+          "name": "out_valid_o",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "out_last_o",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "out_ready_i",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": false
+    },
+    "A20": {
+      "actual_size_um": [
+        860.46,
+        526.14
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "mosi",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "miso",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "sck",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cs_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A23": {
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SAMP",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B[9]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[8]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "eoc",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "Vin",
+          "io_type": "analog"
+        },
+        {
+          "name": "VRP",
+          "io_type": "analog"
+        },
+        {
+          "name": "VRN",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "A28": {
+      "actual_size_um": [
+        168.12,
+        347.54
+      ],
+      "pins": [
+        {
+          "name": "vss",
+          "io_type": "ground"
+        },
+        {
+          "name": "vref",
+          "io_type": "analog"
+        },
+        {
+          "name": "iout",
+          "io_type": "analog"
+        },
+        {
+          "name": "vdd",
+          "io_type": "power"
+        }
+      ],
+      "export_control": false
+    },
+    "A30": {
+      "actual_size_um": [
+        1048.06,
+        1047.5
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "reset",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_miso",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_data0",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_data1",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_data2",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_data3",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_clk_out",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_flash_select",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_ram_a_select",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "uart_tx",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_select",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "disp_spi_clk_out",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_mosi",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "spi_dc",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A34": {
+      "actual_size_um": [
+        1475.34,
+        1455.18
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_3",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_4",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_5",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_6",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "input_in_7",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "output_out_0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "output_out_1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "output_out_2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "output_out_3",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A37": {
+      "actual_size_um": [
+        887.9,
+        886.78
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "i_clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "i_rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "i_uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "o_uart_tx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A40": {
+      "actual_size_um": [
+        1643.34,
+        1078.86
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "IQ_DATA_I_0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_Q_0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_I_1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_Q_1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_I_2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_Q_2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_I_3",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_DATA_Q_3",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IQ_CLK",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "RESETB",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "REMOD_A_I",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "REMOD_A_Q",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "PSRAM_SCK",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "PSRAM_CE_N",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "PSRAM_SIO_0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "PSRAM_SIO_1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "PSRAM_SIO_2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "PSRAM_SIO_3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "HOST_CS",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "SPI_SCK",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "SPI_MOSI",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "SPI_MISO",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "IRQ_OUT",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "ARRAY_ACQ_N",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DBG0",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A43": {
+      "actual_size_um": [
+        1372.3,
+        467.34
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "AUDIO_OUT_L",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "SYS_CLK_60M",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "RESET_N",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DAC_FB_IN_L",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "USB_DP_PULL",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DAC_MOD_OUT_L",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "USB_DP",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "USB_DN",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "A44": {
+      "actual_size_um": [
+        999.2,
+        1006.715
+      ],
+      "pins": [
+        {
+          "name": "GND",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "CLKS",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DOUT[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VREFN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VINN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VINP",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREFP",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "A45": {
+      "actual_size_um": [
+        1088.38,
+        1086.7
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "clk_int",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "scan_in",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "scan_shift",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "scan_load",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "scan_i0o1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "scan_out",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_out[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_out[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_out[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_out[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "gpio_in[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "gpio_in[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_tx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_sclk",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_mosi",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_miso",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_cs_n",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A48": {
+      "actual_size_um": [
+        320.06,
+        486.94
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "iCLK",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "iRST",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "iSPI_CS",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "iSPI_SCK",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "iSPI_MOSI",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "oSPI_MISO",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "oINTERRUPT",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": false
+    },
+    "A49": {
+      "actual_size_um": [
+        413.2,
+        620.97
+      ],
+      "pins": [
+        {
+          "name": "vss",
+          "io_type": "ground"
+        },
+        {
+          "name": "vdd",
+          "io_type": "power"
+        },
+        {
+          "name": "start",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "done",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "vref",
+          "io_type": "analog"
+        },
+        {
+          "name": "vin",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "A52": {
+      "actual_size_um": [
+        353.19,
+        512.625
+      ],
+      "pins": [
+        {
+          "name": "AVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "Vbiasn",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vbiasp",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREFN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREFP",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vin-",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vin+",
+          "io_type": "analog"
+        },
+        {
+          "name": "AVDD",
+          "io_type": "power"
+        },
+        {
+          "name": "DVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "in_clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "serial_out",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DVDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A53": {
+      "actual_size_um": [
+        312.43,
+        504.155
+      ],
+      "pins": [
+        {
+          "name": "GND",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "test_data_in",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "test_mode_en",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "data_serial_out",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "bist_flag_out",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "vin_vco",
+          "io_type": "analog"
+        },
+        {
+          "name": "analog_raw_out",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A54": {
+      "actual_size_um": [
+        1068.22,
+        1067.1
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "rsp_data[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_data[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "rsp_valid",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "cmd_valid",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[2]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[3]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[4]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[5]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[6]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_data[7]",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": true
+    },
+    "A56": {
+      "actual_size_um": [
+        1593.76,
+        1022.88
+      ],
+      "pins": [
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SCLK",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "MOSI",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "CS_N",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "MISO",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "busy",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "done",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "wb_done",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "DVDD",
+          "io_type": "power"
+        },
+        {
+          "name": "DVSS",
+          "io_type": "ground"
+        }
+      ],
+      "export_control": true
+    },
+    "A58": {
+      "actual_size_um": [
+        1396.38,
+        1384.62
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "clk_ref",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rx_sample_pulse",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "rxd",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "rxd_out",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "tx_busy",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "txd",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": false
+    },
+    "A63": {
+      "actual_size_um": [
+        425.9,
+        612.38
+      ],
+      "pins": [
+        {
+          "name": "rst_ni",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "clk_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "host_clk_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_sclk_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_cs_ni",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_mosi_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_miso_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "scl_pad_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "sda_pad",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "irq_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        }
+      ],
+      "export_control": true
+    },
+    "A64": {
+      "actual_size_um": [
+        135.39,
+        263.09
+      ],
+      "pins": [
+        {
+          "name": "GND",
+          "io_type": "ground"
+        },
+        {
+          "name": "Von",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vop",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD_3v3",
+          "io_type": "power"
+        },
+        {
+          "name": "Vnn",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vnp",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vpp",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vpn",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "A66": {
+      "actual_size_um": [
+        299.29,
+        436.21
+      ],
+      "pins": [
+        {
+          "name": "CK0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "CK90",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "CK180",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "CK270",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "Fref",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "Vctrl",
+          "io_type": "analog"
+        },
+        {
+          "name": "SDA",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "SCL",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "vdd",
+          "io_type": "power"
+        },
+        {
+          "name": "vss",
+          "io_type": "ground"
+        }
+      ],
+      "export_control": false
+    },
+    "A68": {
+      "actual_size_um": [
+        901.9,
+        902.46
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cs_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "sclk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "mosi",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "miso",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "A71": {
+      "actual_size_um": [
+        488.06,
+        486.94
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_sclk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_cs_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_mosi",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_miso",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "obs0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "obs1",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "obs2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "obs3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": false
+    },
+    "B02": {
+      "actual_size_um": [
+        289.53,
+        134.96
+      ],
+      "pins": [
+        {
+          "name": "VDD_1",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS_1",
+          "io_type": "ground"
+        },
+        {
+          "name": "CSENS",
+          "io_type": "analog"
+        },
+        {
+          "name": "CREF",
+          "io_type": "analog"
+        },
+        {
+          "name": "VCTRL",
+          "io_type": "analog"
+        },
+        {
+          "name": "CAPBANK[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CAPBANK[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CAPBANK[2]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DFF_IN_SEL",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DFF_IN1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DFF_IN2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CHOP",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CCOSENS_OUT",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "CCOREF_OUT",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DOUT",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": false
+    },
+    "B04": {
+      "actual_size_um": [
+        708.55,
+        766.0
+      ],
+      "pins": [
+        {
+          "name": "GND",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "Vin",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vbpf",
+          "io_type": "analog"
+        },
+        {
+          "name": "Venvelope",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vthreshold",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vtrigger",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "sda",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "scl",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "en",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": true
+    },
+    "B05": {
+      "actual_size_um": [
+        238.3,
+        475.18
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "SCL",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "SDA",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "BPF_OUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "OTA_IN_M",
+          "io_type": "analog"
+        },
+        {
+          "name": "JUNCTION",
+          "io_type": "analog"
+        },
+        {
+          "name": "TRIG_OUT",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "RX_IN_P",
+          "io_type": "analog"
+        },
+        {
+          "name": "RX_IN_N",
+          "io_type": "analog"
+        },
+        {
+          "name": "CLK_IN",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "NRST_IN",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "IN_BPF",
+          "io_type": "analog"
+        },
+        {
+          "name": "IN_SCHMITT",
+          "io_type": "analog"
+        },
+        {
+          "name": "GPIO0",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "GPIO1",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "B07": {
+      "pins": [
+        {
+          "name": "VDD3V3",
+          "io_type": "power"
+        },
+        {
+          "name": "VINP",
+          "io_type": "analog"
+        },
+        {
+          "name": "VINN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VOUTP",
+          "io_type": "analog"
+        },
+        {
+          "name": "VOUTN",
+          "io_type": "analog"
+        },
+        {
+          "name": "SWM1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SWM2",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SWM4",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SWM8",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SWM16",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SW0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "VB0V94",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VB1V3",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VCM",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "1UA",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "IB",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VG",
+          "io_type": "analog"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": false
+    },
+    "B08": {
+      "actual_size_um": [
+        245.755,
+        271.51
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "electrode_p",
+          "io_type": "analog"
+        },
+        {
+          "name": "electrode_n",
+          "io_type": "analog"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "START",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDET",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREF",
+          "io_type": "analog"
+        },
+        {
+          "name": "VBIAS",
+          "io_type": "analog"
+        },
+        {
+          "name": "VTRIM",
+          "io_type": "analog"
+        },
+        {
+          "name": "INA_OUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "B11": {
+      "pins": [
+        {
+          "name": "B11_BMS_DVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "B11_BMS_CLKIN",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_CLK_FCHOP",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_DVDD",
+          "io_type": "power"
+        },
+        {
+          "name": "B11_BMS_VINN_CH1",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_VINP_CH1",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_VREFP",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_IBIAS_5u",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_VCM",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_VINN_CH2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B11_BMS_VINP_CH2",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "B11_BMS_EN_EIS",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_EIS_RESET",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_AVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "B11_BMS_AVDD",
+          "io_type": "power"
+        },
+        {
+          "name": "B11_BMS_CH_SEL",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_ATB_SEL_0",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_ATB_SEL_1",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_D_EIS",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_CLK_EIS",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "B11_BMS_ATB_IA_ADC",
+          "io_type": "analog"
+        },
+        {
+          "name": "B11_BMS_DOUT",
+          "io_type": "input_cmos"
+        }
+      ],
+      "export_control": true
+    },
+    "B12": {
+      "actual_size_um": [
+        337.665,
+        396.91
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "V_w2",
+          "io_type": "analog"
+        },
+        {
+          "name": "I_x2",
+          "io_type": "analog"
+        },
+        {
+          "name": "V_b",
+          "io_type": "analog"
+        },
+        {
+          "name": "I_x1",
+          "io_type": "analog"
+        },
+        {
+          "name": "V_w1",
+          "io_type": "analog"
+        },
+        {
+          "name": "V_shift",
+          "io_type": "analog"
+        },
+        {
+          "name": "V_out_perceptron",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "B14": {
+      "actual_size_um": [
+        404.1,
+        347.7
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "B6",
+          "io_type": "analog"
+        },
+        {
+          "name": "B4",
+          "io_type": "analog"
+        },
+        {
+          "name": "B2",
+          "io_type": "analog"
+        },
+        {
+          "name": "B0",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREF_P",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREF_N",
+          "io_type": "analog"
+        },
+        {
+          "name": "B1",
+          "io_type": "analog"
+        },
+        {
+          "name": "B3",
+          "io_type": "analog"
+        },
+        {
+          "name": "B5",
+          "io_type": "analog"
+        },
+        {
+          "name": "B7",
+          "io_type": "analog"
+        },
+        {
+          "name": "VbiasN",
+          "io_type": "analog"
+        },
+        {
+          "name": "RE",
+          "io_type": "analog"
+        },
+        {
+          "name": "AGND",
+          "io_type": "analog"
+        },
+        {
+          "name": "WE",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "TIA_R",
+          "io_type": "analog"
+        },
+        {
+          "name": "CE",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": false
+    },
+    "B18": {
+      "actual_size_um": [
+        762.46,
+        690.78
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "spi_cs_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "spi_sclk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "spi_mosi",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "spi_miso",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "move_en_x",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dir_x",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "ref_wave_x",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "mems_drv_x",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "mems_drv_y",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "ref_wave_y",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dir_y",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "move_en_y",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "comp_x",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "read_en",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "comp_y",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "B22": {
+      "actual_size_um": [
+        797.18,
+        792.7
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "sys_rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "c_miso",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "c_csn",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "c_sclk",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "c_mosi",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "sensor_drdy",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "tmr_forward_en",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_sclk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_csn",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "cmd_mosi",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "fault_flag_out",
+          "io_type": "bidirectional_24ma"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "B23": {
+      "actual_size_um": [
+        579.7,
+        579.7
+      ],
+      "pins": [
+        {
+          "name": "AVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "Vbiasn",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vbiasp",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREFN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VREFP",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vin-",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vin+",
+          "io_type": "analog"
+        },
+        {
+          "name": "AVDD",
+          "io_type": "power"
+        },
+        {
+          "name": "DVSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "rst",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "in_clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "serial_out",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "DVDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": false
+    },
+    "B24": {
+      "pins": [
+        {
+          "name": "GND",
+          "io_type": "ground"
+        },
+        {
+          "name": "Ibias",
+          "io_type": "analog"
+        },
+        {
+          "name": "LED_K",
+          "io_type": "analog"
+        },
+        {
+          "name": "VSET",
+          "io_type": "analog"
+        },
+        {
+          "name": "Comparator_out",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "HPF_outp",
+          "io_type": "analog"
+        },
+        {
+          "name": "HPF_outn",
+          "io_type": "analog"
+        },
+        {
+          "name": "HPF_inp",
+          "io_type": "analog"
+        },
+        {
+          "name": "HPF_inn",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vb1",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vb2",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vb3",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vb4",
+          "io_type": "analog"
+        },
+        {
+          "name": "LPF_outp",
+          "io_type": "analog"
+        },
+        {
+          "name": "LPF_outn",
+          "io_type": "analog"
+        },
+        {
+          "name": "LPF_inp",
+          "io_type": "analog"
+        },
+        {
+          "name": "LPF_inn",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "B26": {
+      "actual_size_um": [
+        659.44,
+        895.22
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "S4P",
+          "io_type": "analog"
+        },
+        {
+          "name": "S4N",
+          "io_type": "analog"
+        },
+        {
+          "name": "ZP",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "YP",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "XP",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "S1N",
+          "io_type": "analog"
+        },
+        {
+          "name": "S1P",
+          "io_type": "analog"
+        },
+        {
+          "name": "S3P",
+          "io_type": "analog"
+        },
+        {
+          "name": "S3N",
+          "io_type": "analog"
+        },
+        {
+          "name": "S2N",
+          "io_type": "analog"
+        },
+        {
+          "name": "S2P",
+          "io_type": "analog"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "B29": {
+      "pins": [
+        {
+          "name": "vdd!",
+          "io_type": "power"
+        },
+        {
+          "name": "gnd!",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SenseA",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vbiadapt",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vleak",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vmem",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vadapt",
+          "io_type": "analog"
+        },
+        {
+          "name": "ST",
+          "io_type": "output_cmos"
+        },
+        {
+          "name": "Vout",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "C01": {
+      "actual_size_um": [
+        693.235,
+        794.435
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "INP_TELESCOPIC",
+          "io_type": "analog"
+        },
+        {
+          "name": "INP_FOLDED",
+          "io_type": "analog"
+        },
+        {
+          "name": "OUT_TELESCOPIC",
+          "io_type": "analog"
+        },
+        {
+          "name": "OUT_FOLDED",
+          "io_type": "analog"
+        },
+        {
+          "name": "INP_5T",
+          "io_type": "analog"
+        },
+        {
+          "name": "INN_TELESCOPIC",
+          "io_type": "analog"
+        },
+        {
+          "name": "INN_FOLDED",
+          "io_type": "analog"
+        },
+        {
+          "name": "PROG_ENA",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "SCAN_IN",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "IBIAS",
+          "io_type": "analog"
+        },
+        {
+          "name": "SCAN_OUT",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "IN_CS",
+          "io_type": "analog"
+        },
+        {
+          "name": "OUT_CS",
+          "io_type": "analog"
+        },
+        {
+          "name": "INN_5T",
+          "io_type": "analog"
+        },
+        {
+          "name": "OUT_5T",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "C04": {
+      "pins": [
+        {
+          "name": "RESET_N",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CLK",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "CS_N",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DIN",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "DOUT",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "ROW0_PLL_IN",
+          "io_type": "analog"
+        },
+        {
+          "name": "ROW1_PLL_OUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "ROW2_PLL_FB_IN",
+          "io_type": "analog"
+        },
+        {
+          "name": "ROW3_VCO_IN",
+          "io_type": "analog"
+        },
+        {
+          "name": "ROW4_TEST_OUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "ROW5_TEST_IN",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "D03": {
+      "actual_size_um": [
+        1078.4,
+        1068.24
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din_valid_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[7]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[6]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[5]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[4]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[3]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[2]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[1]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din[0]",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din_ready_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout_valid_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[7]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "dout[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "D04": {
+      "actual_size_um": [
+        528.38,
+        455.58
+      ],
+      "pins": [
+        {
+          "name": "vss",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "uart_rx",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_tx",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "vdd",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "D05": {
+      "actual_size_um": [
+        542.4,
+        542.4
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "RFP",
+          "io_type": "analog"
+        },
+        {
+          "name": "RFN",
+          "io_type": "analog"
+        },
+        {
+          "name": "VOUT",
+          "io_type": "analog"
+        },
+        {
+          "name": "VCC",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "D08": {
+      "actual_size_um": [
+        494.66,
+        1097.01
+      ],
+      "pins": [
+        {
+          "name": "temp_out",
+          "io_type": "analog"
+        },
+        {
+          "name": "oxa_vref",
+          "io_type": "analog"
+        },
+        {
+          "name": "gpt_vref",
+          "io_type": "analog"
+        },
+        {
+          "name": "deepseek_vref",
+          "io_type": "analog"
+        },
+        {
+          "name": "oxa_cmp",
+          "io_type": "analog"
+        },
+        {
+          "name": "gpt_cmp",
+          "io_type": "analog"
+        },
+        {
+          "name": "deepseek_cmp",
+          "io_type": "analog"
+        },
+        {
+          "name": "oxa_ota",
+          "io_type": "analog"
+        },
+        {
+          "name": "gpt_ota",
+          "io_type": "analog"
+        },
+        {
+          "name": "deepseek_ota",
+          "io_type": "analog"
+        },
+        {
+          "name": "vss",
+          "io_type": "ground"
+        },
+        {
+          "name": "vdd",
+          "io_type": "power"
+        },
+        {
+          "name": "ibias",
+          "io_type": "analog"
+        },
+        {
+          "name": "inp",
+          "io_type": "analog"
+        },
+        {
+          "name": "inn",
+          "io_type": "analog"
+        },
+        {
+          "name": "clk",
+          "io_type": "analog"
+        }
+      ],
+      "export_control": true
+    },
+    "D10": {
+      "actual_size_um": [
+        273.02,
+        239.98
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "clk",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_n",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "din",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "load_en",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "shift_out_en",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "dout",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "done",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    },
+    "D14": {
+      "actual_size_um": [
+        342.25,
+        325.375
+      ],
+      "pins": [
+        {
+          "name": "avss",
+          "io_type": "ground"
+        },
+        {
+          "name": "Vin",
+          "io_type": "analog"
+        },
+        {
+          "name": "Vin_neg",
+          "io_type": "analog"
+        },
+        {
+          "name": "vpre1",
+          "io_type": "analog"
+        },
+        {
+          "name": "vpre2",
+          "io_type": "analog"
+        },
+        {
+          "name": "vpost1",
+          "io_type": "analog"
+        },
+        {
+          "name": "vpost2",
+          "io_type": "analog"
+        },
+        {
+          "name": "vout_1",
+          "io_type": "analog"
+        },
+        {
+          "name": "vout_2",
+          "io_type": "analog"
+        },
+        {
+          "name": "avdd",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "D15": {
+      "actual_size_um": [
+        1076.06,
+        1074.94
+      ],
+      "pins": [
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk_i",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_ni",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "boot_select_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "execute_from_flash_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_rx_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_tx_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_sck_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_cs_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_sd_io[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_sd_io[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_sd_io[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "spi_flash_sd_io[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_valid_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[4]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[5]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "status_o[6]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "VDD",
+          "io_type": "power"
+        }
+      ],
+      "export_control": true
+    },
+    "D16": {
+      "actual_size_um": [
+        935.5,
+        937.74
+      ],
+      "pins": [
+        {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
+          "name": "clk_i",
+          "io_type": "input_schmitt"
+        },
+        {
+          "name": "rst_ni",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_rx_i",
+          "io_type": "input_cmos"
+        },
+        {
+          "name": "uart_tx_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "uart_tx_en_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_sclk_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_cs_n_o",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_o[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_o[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_o[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_o[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_i[0]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_i[1]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_i[2]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_i[3]",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "qspi_io_oe_o",
+          "io_type": "bidirectional"
+        }
+      ],
+      "export_control": true
+    }
+  },
   "projects": [
     {
       "id": "A01",
