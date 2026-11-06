@@ -1,3 +1,19 @@
+# Copyright 2026 D. Mitch Bailey
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 import os
 os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 import pytest
@@ -252,3 +268,20 @@ def test_json_only_metadata_renders_without_local_sources(window,tmp_path):
     window.refresh()
     assert window.dirty
     assert window.plan.project_metadata['P01']=={'actual_size_um':[700,300],'export_control':False,'pins':[{'name':'VDD','io_type':'power'}]}
+
+@pytest.mark.parametrize('source',['absent','directory','link','broken_link'])
+def test_export_control_updates_only_with_available_directory(window,tmp_path,source):
+    from floorplanner.persistence import loads
+    w=window; w.plan.projects=[Project('P01'),Project('P02')]
+    w.plan.project_metadata={'P01':{'export_control':True},'P02':{'export_control':False}}
+    target=tmp_path/'documents'
+    if source in ('directory','link'):
+        target.mkdir(); (target/'P02_Export.pdf').write_text('')
+    if source in ('link','broken_link'):
+        link=tmp_path/'export_control'; link.symlink_to(target,target_is_directory=True)
+        w.export_control_directory=link
+    else: w.export_control_directory=target
+    w.path=str(tmp_path/'saved.json'); w.refresh(); w.save_plan()
+    saved=loads((tmp_path/'saved.json').read_text(),w.catalog)
+    expected={'P01':False,'P02':True} if source in ('directory','link') else {'P01':True,'P02':False}
+    assert {code:entry['export_control'] for code,entry in saved.project_metadata.items()}==expected

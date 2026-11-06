@@ -1,13 +1,53 @@
+<!--
+Copyright 2026 D. Mitch Bailey
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Chipathon 2026 Floorplanner
 
-Desktop planning tool for the GF180MCU D chip frames. Requires Python 3.11+.
+Desktop planning tool for the GF180MCU D chip frames.
+
+## Installation
+
+Install Python 3.11 or newer, including pip and virtual-environment support. Download or clone this repository, then open a terminal in its root directory. A desktop graphical session is needed to run the application. KLayout and GDS files are not required.
+
+On macOS or Linux:
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-python main.py
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python main.py <json_floorplan>
 ```
+
+On Windows (PowerShell):
+
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe main.py
+```
+
+Dependencies include PySide6 for the desktop interface, PyYAML for project metadata, and pytest for verification. Keep the `config` and `floorplanner` directories alongside `main.py`. On later launches, activate the environment again or invoke its Python executable directly. If PySide6 has no compatible wheel, use a Python version and operating system supported by the selected PySide6 release.
+
+Local `data/` and `gds_project_audit.csv` files are optional. To use a portable plan, install the application and open its JSON file; saved metadata supplies the size, pin, and export-control information.
+
+## Running
 
 Open a saved floorplan directly at startup:
 
@@ -65,4 +105,11 @@ Pin names appear automatically when zoomed in far enough to read them. Circles u
 
 Saved JSON includes a `project_metadata` section keyed by project code, containing `actual_size_um`, `export_control` (document present/absent), and `pins` (name and io_type). People with the application and just this JSON can see actual-size outlines, document-status highlighting, and typed pin markers without the local audit or data directory. The documents and GDS themselves are not embedded.
 
-On startup, available CSV and YAML records override their saved metadata. Missing records retain the saved values. If `data/export_control` exists, its document listing overrides saved status (including marking missing documents); if that directory is absent, saved status is retained. Changed metadata marks the plan unsaved; save to distribute the refreshed snapshot. Older plans without metadata still open normally. Local project metadata is also attached when projects are added or edited.
+On startup, available CSV and YAML records override their saved metadata. Missing records retain the saved values. If `data/export_control` exists, its document listing overrides saved status (including marking missing documents); if that directory is absent, saved status is retained. A symlink to an existing directory is supported; a broken symlink also leaves saved status unchanged. Changed metadata marks the plan unsaved; save to distribute the refreshed snapshot. Older plans without metadata still open normally. Local project metadata is also attached when projects are added or edited.
+
+
+## License
+
+Copyright 2026 D. Mitch Bailey. Licensed under the [Apache License, Version 2.0](LICENSE).
+
+Source and documentation carry license headers. JSON files use adjacent `.license` notices to preserve valid JSON. External data and audit symlinks retain their original ownership and licensing.
