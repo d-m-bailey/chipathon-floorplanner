@@ -122,3 +122,5 @@ The audit CSV `type` column supplies project classification: Digital → DIG, An
 Choose **Floorplan → Export Chip YAML** and select an output directory. Every frame produces `IEEE<n>.yaml`, including empty frames (`projects: []`). Existing files with those names are replaced atomically. Frame IDs such as `chip_01` determine the number; custom IDs use frame order. Chip names are `SSCS_2026_<nn>`.
 
 The schema matches the IEEE examples: version 2, `base_chip: chipathon2026_gf180mcu_202609.yaml`, and `minimum_project_gap_um: 10`. Each placement contributes `team`, `variant`, and `quadrant`. Normal/X/Y/XY map to NW/NE/SW/SE; multiple projects may share a quadrant. Canvas frame positions and unassigned projects are omitted. Invalid placements prevent export. The referenced base-chip YAML must be available to the downstream assembly tool.
+
+Each placed block has a centered `F` orientation marker, using the same font size as its name, pin count, and DIG/ANA/MIX label. The F is upright for the upper-left base orientation and mirrors with X/Y reflections.
