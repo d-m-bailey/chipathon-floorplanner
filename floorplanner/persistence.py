@@ -43,7 +43,7 @@ def validate_metadata(metadata):
 def dumps(plan,catalog):
     return json.dumps(dict(schema_version=1,chip_type='gf180mcuD',configuration_hash=config_hash(catalog),**asdict(plan)),indent=2)
 
-def loads(text,catalog):
+def loads(text,catalog,pin_counts=None):
     data=json.loads(text)
     if data.get('schema_version')!=1: raise ValueError('Unsupported schema version')
     if data.get('chip_type')!='gf180mcuD': raise ValueError('Unsupported chip type')
@@ -53,6 +53,8 @@ def loads(text,catalog):
         p=dict(item)
         legacy_pins=p.pop('logical_pins', [])
         p.setdefault('pin_count',len(legacy_pins))
+        if pin_counts is not None and p['id'].upper() in pin_counts:
+            p['pin_count']=pin_counts[p['id'].upper()]
         projects.append(Project(**p))
     frames=[Frame(**{**f,'placements':[Placement(**p) for p in f['placements']]}) for f in data['frames']]
     if len({p.id for p in projects})!=len(projects) or len({f.id for f in frames})!=len(frames): raise ValueError('Duplicate IDs')

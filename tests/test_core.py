@@ -182,3 +182,22 @@ def test_chip_yaml_samples(catalog,tmp_path):
     assert yaml.safe_load(paths[0].read_text())==docs['IEEE1.yaml']
     assert yaml.safe_load(paths[1].read_text())['projects']==[]
     export_chip_yaml(tmp_path,plan,catalog)
+
+
+def test_audit_pin_counts_exclude_unmatched(tmp_path,catalog):
+    from floorplanner.gds_audit import load_pin_counts
+    path=tmp_path/'audit.csv'
+    path.write_text('Team,power,ground,analog,input_cmos,input_schmitt,bidirectional,bidirectional_24ma,unmatched\n'
+                    'p01,1:VDD,1:VSS,2:a b,3:c d e,1:f,2:g h,1:i,50:internal\n'
+                    'P02,0:,0:,0:,0:,0:,0:,0:,9:internal\n'
+                    'P03,invalid,0:,0:,0:,0:,0:,0:,0:\n')
+    counts,reports=load_pin_counts(path)
+    assert counts=={'P01':11,'P02':0}
+    assert len(reports)==1
+    # Correct counts before capacity validation, and preserve them on save.
+    plan=Plan([Project('p01',pin_count=61),Project('other',pin_count=5)],
+              [Frame('f',placements=[Placement('p01','A')])])
+    corrected=loads(dumps(plan,catalog),catalog,counts)
+    assert [p.pin_count for p in corrected.projects]==[11,5]
+    assert loads(dumps(corrected,catalog),catalog)==corrected
+    assert load_pin_counts(tmp_path/'missing.csv')[0]=={}

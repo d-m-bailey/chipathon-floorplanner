@@ -5,8 +5,8 @@
   "project_metadata": {
     "A01": {
       "actual_size_um": [
-        603.13,
-        269.59
+        503.13,
+        312.02
       ],
       "pins": [
         {
@@ -828,8 +828,8 @@
       ],
       "export_control": true,
       "actual_size_um": [
-        133.12,
-        310.74
+        126.48,
+        228.95
       ],
       "design_type": "MIX"
     },
@@ -1017,8 +1017,8 @@
     },
     "A37": {
       "actual_size_um": [
-        887.9,
-        886.78
+        1048.06,
+        1047.5
       ],
       "pins": [
         {
@@ -1561,8 +1561,8 @@
     },
     "A53": {
       "actual_size_um": [
-        312.43,
-        504.155
+        321.67,
+        523.755
       ],
       "pins": [
         {
@@ -1804,7 +1804,7 @@
           "io_type": "power"
         }
       ],
-      "export_control": false,
+      "export_control": true,
       "design_type": "DIG"
     },
     "A63": {
@@ -2614,7 +2614,7 @@
           "io_type": "analog"
         }
       ],
-      "export_control": false,
+      "export_control": true,
       "design_type": "ANA"
     },
     "B18": {
@@ -2705,8 +2705,8 @@
     },
     "B22": {
       "actual_size_um": [
-        797.18,
-        792.7
+        798.0,
+        791.6
       ],
       "pins": [
         {
@@ -2767,7 +2767,7 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "MIX"
     },
     "B23": {
       "actual_size_um": [
@@ -2842,14 +2842,6 @@
           "io_type": "analog"
         },
         {
-          "name": "LED_K",
-          "io_type": "analog"
-        },
-        {
-          "name": "VSET",
-          "io_type": "analog"
-        },
-        {
           "name": "Comparator_out",
           "io_type": "analog"
         },
@@ -2906,7 +2898,12 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true
+      "export_control": true,
+      "actual_size_um": [
+        136.385,
+        377.995
+      ],
+      "design_type": "ANA"
     },
     "B26": {
       "actual_size_um": [
@@ -3157,7 +3154,7 @@
           "io_type": "analog"
         }
       ],
-      "export_control": true,
+      "export_control": false,
       "actual_size_um": [
         2804.03,
         2804.03
@@ -3406,8 +3403,8 @@
     },
     "D10": {
       "actual_size_um": [
-        273.02,
-        239.98
+        236.62,
+        267.42
       ],
       "pins": [
         {
@@ -3728,7 +3725,7 @@
       "id": "A12",
       "name": "A12",
       "block_type": "ACE",
-      "pin_count": 150,
+      "pin_count": 22,
       "shared_nets": {}
     },
     {
@@ -3742,7 +3739,7 @@
       "id": "A19",
       "name": "A19",
       "block_type": "ACE",
-      "pin_count": 52,
+      "pin_count": 32,
       "shared_nets": {}
     },
     {
@@ -3763,7 +3760,7 @@
       "id": "A28",
       "name": "A28",
       "block_type": "D",
-      "pin_count": 11,
+      "pin_count": 4,
       "shared_nets": {}
     },
     {
@@ -3832,8 +3829,8 @@
     {
       "id": "A52",
       "name": "A52",
-      "block_type": "D",
-      "pin_count": 85,
+      "block_type": "BV",
+      "pin_count": 13,
       "shared_nets": {}
     },
     {
@@ -3916,14 +3913,14 @@
     {
       "id": "B05",
       "name": "B05",
-      "block_type": "D",
-      "pin_count": 70,
+      "block_type": "BV",
+      "pin_count": 16,
       "shared_nets": {}
     },
     {
       "id": "B07",
       "name": "B07",
-      "block_type": "?",
+      "block_type": "BVE",
       "pin_count": 19,
       "shared_nets": {}
     },
@@ -3937,7 +3934,7 @@
     {
       "id": "B11",
       "name": "B11",
-      "block_type": "?",
+      "block_type": "A",
       "pin_count": 22,
       "shared_nets": {}
     },
@@ -3972,22 +3969,22 @@
     {
       "id": "B23",
       "name": "B23",
-      "block_type": "BV",
+      "block_type": "BH",
       "pin_count": 13,
       "shared_nets": {}
     },
     {
       "id": "B24",
       "name": "B24",
-      "block_type": "?",
-      "pin_count": 18,
+      "block_type": "BH",
+      "pin_count": 16,
       "shared_nets": {}
     },
     {
       "id": "B26",
       "name": "B26",
       "block_type": "ACE",
-      "pin_count": 46,
+      "pin_count": 13,
       "shared_nets": {}
     },
     {
@@ -4007,7 +4004,7 @@
     {
       "id": "C04",
       "name": "C04",
-      "block_type": "?",
+      "block_type": "ACE",
       "pin_count": 13,
       "shared_nets": {}
     },
@@ -4218,18 +4215,6 @@
       ],
       "placements": [
         {
-          "project_id": "A13",
-          "block_type": "BV",
-          "mirror_x": false,
-          "mirror_y": true
-        },
-        {
-          "project_id": "A45",
-          "block_type": "A",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
           "project_id": "D16",
           "block_type": "A",
           "mirror_x": true,
@@ -4246,6 +4231,18 @@
           "block_type": "BV",
           "mirror_x": true,
           "mirror_y": true
+        },
+        {
+          "project_id": "A13",
+          "block_type": "BV",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A45",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": false
         }
       ],
       "pads": []
@@ -4259,27 +4256,39 @@
       ],
       "placements": [
         {
-          "project_id": "A02",
-          "block_type": "A",
+          "project_id": "A58",
+          "block_type": "ACE",
           "mirror_x": false,
           "mirror_y": false
         },
         {
-          "project_id": "A10",
-          "block_type": "A",
-          "mirror_x": true,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A56",
-          "block_type": "ACV",
+          "project_id": "D10",
+          "block_type": "EV2",
           "mirror_x": false,
           "mirror_y": true
         },
         {
-          "project_id": "D14",
+          "project_id": "B08",
           "block_type": "D",
           "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A64",
+          "block_type": "EH2",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A01",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A53",
+          "block_type": "D",
+          "mirror_x": false,
           "mirror_y": true
         }
       ],
@@ -4294,12 +4303,6 @@
       ],
       "placements": [
         {
-          "project_id": "B08",
-          "block_type": "D",
-          "mirror_x": true,
-          "mirror_y": true
-        },
-        {
           "project_id": "D15",
           "block_type": "A",
           "mirror_x": false,
@@ -4312,16 +4315,16 @@
           "mirror_y": false
         },
         {
-          "project_id": "A68",
-          "block_type": "CH2",
-          "mirror_x": true,
-          "mirror_y": false
-        },
-        {
           "project_id": "A20",
           "block_type": "BH",
           "mirror_x": true,
           "mirror_y": false
+        },
+        {
+          "project_id": "B11",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": true
         }
       ],
       "pads": []
@@ -4341,34 +4344,22 @@
           "mirror_y": true
         },
         {
-          "project_id": "A53",
-          "block_type": "D",
+          "project_id": "A12",
+          "block_type": "ACE",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A52",
+          "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B05",
+          "block_type": "BV",
           "mirror_x": true,
           "mirror_y": true
-        },
-        {
-          "project_id": "D10",
-          "block_type": "EV2",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A01",
-          "block_type": "D",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A64",
-          "block_type": "EH2",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A23",
-          "block_type": "BVE",
-          "mirror_x": true,
-          "mirror_y": false
         }
       ],
       "pads": []
@@ -4388,10 +4379,28 @@
           "mirror_y": false
         },
         {
-          "project_id": "B14",
-          "block_type": "BVE",
+          "project_id": "B23",
+          "block_type": "BH",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A28",
+          "block_type": "D",
           "mirror_x": true,
           "mirror_y": false
+        },
+        {
+          "project_id": "A66",
+          "block_type": "EH2",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A71",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
         }
       ],
       "pads": []
@@ -4405,27 +4414,15 @@
       ],
       "placements": [
         {
-          "project_id": "A66",
-          "block_type": "EH2",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A28",
-          "block_type": "D",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
           "project_id": "A48",
           "block_type": "EH2",
           "mirror_x": true,
           "mirror_y": false
         },
         {
-          "project_id": "A71",
-          "block_type": "D",
-          "mirror_x": true,
+          "project_id": "A19",
+          "block_type": "ACE",
+          "mirror_x": false,
           "mirror_y": false
         }
       ],
@@ -4435,21 +4432,21 @@
       "id": "chip_11",
       "name": "Chip 11",
       "canvas_position": [
-        7000,
-        2500
+        0,
+        -1000
       ],
       "placements": [
         {
-          "project_id": "B23",
-          "block_type": "BV",
+          "project_id": "B07",
+          "block_type": "BVE",
           "mirror_x": false,
           "mirror_y": false
         },
         {
-          "project_id": "A58",
+          "project_id": "C04",
           "block_type": "ACE",
           "mirror_x": true,
-          "mirror_y": false
+          "mirror_y": true
         }
       ],
       "pads": []
@@ -4461,7 +4458,26 @@
         10500,
         2500
       ],
-      "placements": [],
+      "placements": [
+        {
+          "project_id": "D14",
+          "block_type": "D",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "B14",
+          "block_type": "BVE",
+          "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "B24",
+          "block_type": "BH",
+          "mirror_x": false,
+          "mirror_y": false
+        }
+      ],
       "pads": []
     },
     {
@@ -4473,8 +4489,66 @@
       ],
       "placements": [
         {
+          "project_id": "A02",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A56",
+          "block_type": "ACV",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
           "project_id": "A49",
           "block_type": "BV",
+          "mirror_x": true,
+          "mirror_y": true
+        },
+        {
+          "project_id": "A10",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_14",
+      "name": "Chip 14",
+      "canvas_position": [
+        10500,
+        -1000
+      ],
+      "placements": [
+        {
+          "project_id": "B26",
+          "block_type": "ACE",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A23",
+          "block_type": "BVE",
+          "mirror_x": true,
+          "mirror_y": false
+        }
+      ],
+      "pads": []
+    },
+    {
+      "id": "chip_15",
+      "name": "Chip 15",
+      "canvas_position": [
+        14000,
+        -1000
+      ],
+      "placements": [
+        {
+          "project_id": "A68",
+          "block_type": "CH2",
           "mirror_x": false,
           "mirror_y": false
         }

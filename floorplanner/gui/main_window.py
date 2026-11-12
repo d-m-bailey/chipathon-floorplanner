@@ -30,7 +30,7 @@ from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 from ..chip_yaml import export_chip_yaml
-from ..gds_audit import load_actual_sizes, load_project_types
+from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
 class PinLabel(QGraphicsSimpleTextItem):
@@ -174,6 +174,8 @@ class MainWindow(QMainWindow):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.actual_sizes,self.audit_reports=load_actual_sizes()
         self.project_types=load_project_types()
+        self.audit_pin_counts,pin_count_reports=load_pin_counts()
+        self.audit_reports.extend(pin_count_reports)
         self.project_pins,self.pin_reports=load_project_pins()
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
@@ -385,6 +387,7 @@ class MainWindow(QMainWindow):
         if adapter_path: adapter=json.loads(Path(adapter_path).read_text())
         projects,reports=import_projects(root,bt,adapter); self.checkpoint()
         for p in projects:
+            if p.id.upper() in self.audit_pin_counts: p.pin_count=self.audit_pin_counts[p.id.upper()]
             if any(q.id==p.id for q in self.plan.projects): reports.append(f'Skipped duplicate ID: {p.id}')
             else:self.plan.projects.append(p)
         self.refresh(); QMessageBox.information(self,'Import report','\n'.join(reports) or f'Imported {len(projects)} projects')
@@ -409,7 +412,7 @@ class MainWindow(QMainWindow):
         if path: self.load_file(path)
     def load_file(self,path,record_history=True):
         path=str(Path(path).expanduser().resolve())
-        plan=loads(Path(path).read_text(),self.catalog)
+        plan=loads(Path(path).read_text(),self.catalog,self.audit_pin_counts)
         if record_history: self.checkpoint()
         else: self.undo_stack.clear(); self.redo_stack.clear()
         self.plan=plan; self.path=path; self.selected=None; self.dirty=False

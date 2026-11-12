@@ -56,3 +56,28 @@ def load_project_types(path=AUDIT_PATH):
                 if code and kind: types[code]=kind
     except OSError: pass
     return types
+
+
+PIN_COUNT_COLUMNS=('power','ground','analog','input_cmos','input_schmitt','bidirectional','bidirectional_24ma')
+
+
+def load_pin_counts(path=AUDIT_PATH):
+    """Count layout pins from recognized audit categories, excluding unmatched."""
+    counts={}; reports=[]
+    try:
+        with Path(path).open(newline='',encoding='utf-8-sig') as source:
+            reader=csv.DictReader(source)
+            if not {'Team',*PIN_COUNT_COLUMNS}.issubset(reader.fieldnames or []):
+                return {},['GDS audit is missing pin count columns']
+            for line,row in enumerate(reader,2):
+                code=(row.get('Team') or '').strip().upper()
+                try:
+                    values=[int(row[column].split(':',1)[0]) for column in PIN_COUNT_COLUMNS]
+                    if not code or any(value<0 for value in values):
+                        raise ValueError('pin counts must be nonnegative integers with a project code')
+                    if code in counts: raise ValueError('duplicate project code')
+                    counts[code]=sum(values)
+                except (ValueError,TypeError,AttributeError) as error:
+                    reports.append(f'GDS audit row {line} ({code}): {error}')
+    except OSError as error: reports.append(f'Unable to read GDS audit: {error}')
+    return counts,reports
