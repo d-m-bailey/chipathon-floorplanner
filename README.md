@@ -126,3 +126,5 @@ The schema matches the IEEE examples: version 2, `base_chip: chipathon2026_gf180
 Each placed block has a centered `F` orientation marker, using the same font size as its name, pin count, and DIG/ANA/MIX label. The F is upright for the upper-left base orientation and mirrors with X/Y reflections.
 
 When opening a plan or importing projects, audit pin counts sum `power`, `ground`, `analog`, `input_cmos`, `input_schmitt`, `bidirectional`, and `bidirectional_24ma`. `unmatched` signals are excluded. Projects without a valid audit count retain their saved or imported count. The resulting counts are saved in the plan for portable use.
+
+The inspector displays **PR boundary size** from the audit's `width` and `height` columns, separately from actual GDS content size. When both boundary dimensions exactly match the project's assigned block dimensions (without rotation), its project-list text, layout label, and cell outline turn green. This highlight takes precedence over the missing-export-document color; the document warning remains in the tooltip. Boundary sizes are saved in portable project metadata as `pr_boundary_size_um`.

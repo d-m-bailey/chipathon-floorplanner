@@ -28,10 +28,11 @@ def validate_metadata(metadata):
     if not isinstance(metadata,dict): raise ValueError('Invalid project metadata')
     for code,entry in metadata.items():
         if not isinstance(code,str) or not isinstance(entry,dict): raise ValueError('Invalid project metadata entry')
-        if 'actual_size_um' in entry:
-            size=entry['actual_size_um']
+        for size_key in ('actual_size_um','pr_boundary_size_um'):
+            if size_key not in entry: continue
+            size=entry[size_key]
             if not isinstance(size,list) or len(size)!=2 or any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in size):
-                raise ValueError('Invalid actual size')
+                raise ValueError(f'Invalid {size_key}')
         if 'export_control' in entry and type(entry['export_control']) is not bool: raise ValueError('Invalid export control status')
         if 'design_type' in entry and entry['design_type'] not in ('DIG','ANA','MIX'): raise ValueError('Invalid design type')
         if 'pins' in entry:

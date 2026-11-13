@@ -27,7 +27,7 @@ def app():return QApplication.instance() or QApplication([])
 
 @pytest.fixture
 def window(app,tmp_path):
-    w=MainWindow(); w.actual_sizes={}; w.project_pins={}; w.project_types={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
+    w=MainWindow(); w.actual_sizes={}; w.pr_boundary_sizes={}; w.project_pins={}; w.project_types={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
     w.dirty=False; w.close()
 
 def test_gui_drag_and_undo(window,app):
@@ -326,3 +326,27 @@ def test_delete_project_menu_and_undo(window):
     history=len(w.undo_stack)
     action.trigger()
     assert len(w.undo_stack)==history
+
+
+def test_pr_boundary_match_highlighting(window):
+    from PySide6.QtGui import QColor
+    from PySide6.QtWidgets import QGraphicsSimpleTextItem
+    w=window; b=w.catalog['A']
+    w.plan.projects=[Project('P01')]
+    w.plan.frames[0].placements=[Placement('P01','A')]
+    w.pr_boundary_sizes={'P01':(b.width_um,b.height_um)}
+    w.selected='P01'; w.refresh()
+    assert f'PR boundary size: {b.width_um:g} × {b.height_um:g} µm' in w.inspector.toPlainText()
+    assert w.palette.item(0).foreground().color()==QColor('#008000')
+    block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+    assert block.pen().color()==QColor('#008000')
+    label=next(i for i in block.childItems() if isinstance(i,QGraphicsSimpleTextItem) and 'P01' in i.text())
+    assert label.brush().color()==QColor('#008000')
+    w.pr_boundary_sizes={'P01':(b.width_um+1,b.height_um)}; w.refresh()
+    assert not w.boundary_matches('P01','A')
+    assert w.palette.item(0).foreground().color()!=QColor('#008000')
+    # Embedded boundary metadata works without the local audit.
+    w.pr_boundary_sizes={}; w.plan.project_metadata['P01']['pr_boundary_size_um']=[b.width_um,b.height_um]
+    w.refresh()
+    assert w.boundary_matches('P01','A')
+    assert not w.boundary_matches('P01','?')

@@ -22,18 +22,18 @@ from pathlib import Path
 AUDIT_PATH=Path(__file__).resolve().parent.parent/'gds_project_audit.csv'
 
 
-def load_actual_sizes(path=AUDIT_PATH):
+def _load_sizes(path,width_column,height_column):
     sizes={}; reports=[]
     try:
         with Path(path).open(newline='',encoding='utf-8-sig') as source:
             reader=csv.DictReader(source)
-            required={'Team','computed_width','computed_height'}
+            required={'Team',width_column,height_column}
             if not required.issubset(reader.fieldnames or []):
-                return {},['GDS audit is missing Team/computed_width/computed_height columns']
+                return {},[f'GDS audit is missing Team/{width_column}/{height_column} columns']
             for line,row in enumerate(reader,2):
                 code=(row.get('Team') or '').strip()
                 try:
-                    width=float(row['computed_width']); height=float(row['computed_height'])
+                    width=float(row[width_column]); height=float(row[height_column])
                     if not code or any(not math.isfinite(v) or v<=0 for v in (width,height)):
                         raise ValueError('dimensions must be positive finite values')
                     if code.upper() in sizes: raise ValueError('duplicate project code')
@@ -42,6 +42,15 @@ def load_actual_sizes(path=AUDIT_PATH):
                     reports.append(f'GDS audit row {line} ({code}): {error}')
     except OSError as error: reports.append(f'Unable to read GDS audit: {error}')
     return sizes,reports
+
+
+def load_actual_sizes(path=AUDIT_PATH):
+    return _load_sizes(path,'computed_width','computed_height')
+
+
+def load_pr_boundary_sizes(path=AUDIT_PATH):
+    """Read PR boundary dimensions independently of measured content dimensions."""
+    return _load_sizes(path,'width','height')
 
 
 def load_project_types(path=AUDIT_PATH):

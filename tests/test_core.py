@@ -201,3 +201,15 @@ def test_audit_pin_counts_exclude_unmatched(tmp_path,catalog):
     assert [p.pin_count for p in corrected.projects]==[11,5]
     assert loads(dumps(corrected,catalog),catalog)==corrected
     assert load_pin_counts(tmp_path/'missing.csv')[0]=={}
+
+
+def test_pr_boundary_sizes(tmp_path,catalog):
+    from floorplanner.gds_audit import load_pr_boundary_sizes
+    path=tmp_path/'audit.csv'
+    path.write_text('Team,width,height,computed_width,computed_height\nP01,1110,550,600,200\nP02,,550,600,200\nP03,nan,0,600,200\n')
+    sizes,reports=load_pr_boundary_sizes(path)
+    assert sizes=={'P01':(1110,550)} and len(reports)==2
+    plan=Plan([Project('P01')],project_metadata={'P01':{'pr_boundary_size_um':[1110,550]}})
+    assert loads(dumps(plan,catalog),catalog)==plan
+    plan.project_metadata['P01']['pr_boundary_size_um']=[0,550]
+    with pytest.raises(ValueError): loads(dumps(plan,catalog),catalog)

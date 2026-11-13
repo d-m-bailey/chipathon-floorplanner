@@ -30,7 +30,7 @@ from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 from ..chip_yaml import export_chip_yaml
-from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts
+from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts, load_pr_boundary_sizes
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
 class PinLabel(QGraphicsSimpleTextItem):
@@ -173,6 +173,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__(); self.setWindowTitle('Chipathon 2026 · Floorplanner'); self.resize(1440,900)
         self.actual_sizes,self.audit_reports=load_actual_sizes()
+        self.pr_boundary_sizes,boundary_reports=load_pr_boundary_sizes()
+        self.audit_reports.extend(boundary_reports)
         self.project_types=load_project_types()
         self.audit_pin_counts,pin_count_reports=load_pin_counts()
         self.audit_reports.extend(pin_count_reports)
@@ -209,6 +211,7 @@ class MainWindow(QMainWindow):
         for p in self.plan.projects:
             code=p.id.upper()
             entry=dict(self.plan.project_metadata.get(code,{}))
+            if code in self.pr_boundary_sizes: entry['pr_boundary_size_um']=list(self.pr_boundary_sizes[code])
             if code in self.actual_sizes: entry['actual_size_um']=list(self.actual_sizes[code])
             if code in self.project_types: entry['design_type']=self.project_types[code]
             if code in self.project_pins:
@@ -217,6 +220,11 @@ class MainWindow(QMainWindow):
             if entry and entry!=self.plan.project_metadata.get(code):
                 self.plan.project_metadata[code]=entry; changed=True
         if changed: self.dirty=True
+
+    def boundary_matches(self,project_id,block_type):
+        size=self.plan.project_metadata.get(project_id.upper(),{}).get('pr_boundary_size_um')
+        block=self.catalog.get(block_type)
+        return bool(size and block and tuple(size)==(block.width_um,block.height_um))
 
     def documented_codes(self):
         return {code for code,entry in self.plan.project_metadata.items() if entry.get('export_control',False)}
@@ -241,6 +249,7 @@ class MainWindow(QMainWindow):
             if p.id.upper() not in documented:
                 item.setForeground(QColor('#c62828'))
                 item.setToolTip(item.toolTip()+' — Missing export control document')
+            if self.boundary_matches(p.id,p.block_type): item.setForeground(QColor('#008000'))
             item.setData(Qt.UserRole,p.id); self.palette.addItem(item)
             if p.id==selected: self.palette.setCurrentItem(item)
         self.palette.blockSignals(False)
@@ -260,7 +269,9 @@ class MainWindow(QMainWindow):
                 for r in occupied(b,p.mirror_x,p.mirror_y): path.addRect(r.x,r.y,r.w,r.h)
                 color=colors[p.project_id]
                 outline=QColor('#ff3030') if p.project_id.upper() not in documented else QColor('white') if self.selected==p.project_id else color
-                item=self.view.scene().addPath(path,QPen(outline,20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
+                matches=self.boundary_matches(p.project_id,p.block_type)
+                if matches: outline=QColor('#008000')
+                item=self.view.scene().addPath(path,QPen(outline,25 if matches else 20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
                 actual=self.plan.project_metadata.get(p.project_id.upper(),{}).get('actual_size_um')
@@ -280,7 +291,7 @@ class MainWindow(QMainWindow):
                     pin_label=PinLabel(name,color,dot,angle=-45 if p.mirror_x != p.mirror_y else 45)
                     pin_label.setPos(x,y)
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
-                label.setBrush(QColor('#101c29'))
+                label.setBrush(QColor('#008000') if matches else QColor('#101c29'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
                 label.setPos(r.x+35,r.y+r.h-40); label.setTransform(QTransform.fromScale(1,-1))
                 orientation_label=QGraphicsSimpleTextItem('F',item)
@@ -309,10 +320,12 @@ class MainWindow(QMainWindow):
             self.inspector.setPlainText('Select a project.\n\nDrag from the palette to a chip. X/Y reflect; Delete unassigns. Drag chip backgrounds to reposition frames. Scroll to zoom; drag empty canvas to pan.\n\nPhysical pad mapping is UNVERIFIED until coordinates are loaded.'); return
         try: p=self.plan.project(self.selected)
         except StopIteration: self.selected=None; self.inspect(); return
+        boundary=self.plan.project_metadata.get(p.id.upper(),{}).get('pr_boundary_size_um')
+        boundary_text=f'PR boundary size: {boundary[0]:g} × {boundary[1]:g} µm' if boundary else 'PR boundary size: unavailable'
         if p.block_type=='?':
-            self.inspector.setPlainText(f'{p.id}\n\n{p.name}\n\nType: ?\n\nPins: {p.pin_count}/?\n\nUnassigned: choose a defined block type before placing this project.'); return
+            self.inspector.setPlainText(f'{p.id}\n\n{p.name}\n\nType: ?\n\nPins: {p.pin_count}/?\n\n{boundary_text}\n\nUnassigned: choose a defined block type before placing this project.'); return
         b=self.catalog[p.block_type]; f,pl=self.plan.assignment(p.id)
-        lines=[p.id,p.name,f'Type: {b.name}',f'Pins: {p.pin_count}/{b.pin_count}',f'Dimensions: {b.width_um} × {b.height_um} µm',f'Source area: {b.source_area_um2:,} µm²',f'Calculated area: {b.area:,} µm²',f'Source utilization: {b.source_utilization:.2%}',f'Base lower-left: {b.base_lower_left_um}',f'Frame: {f.name or f.id if f else "Unassigned"}']
+        lines=[p.id,p.name,f'Type: {b.name}',f'Pins: {p.pin_count}/{b.pin_count}',f'Dimensions: {b.width_um} × {b.height_um} µm',boundary_text,f'Source area: {b.source_area_um2:,} µm²',f'Calculated area: {b.area:,} µm²',f'Source utilization: {b.source_utilization:.2%}',f'Base lower-left: {b.base_lower_left_um}',f'Frame: {f.name or f.id if f else "Unassigned"}']
         if pl:
             r=bounds(b,pl.mirror_x,pl.mirror_y); pins,verified=mapped_pins(b,pl.mirror_x,pl.mirror_y,f.pads); es,ws=validate(self.plan,f,pl,self.catalog)
             lines += [f'Current lower-left: ({r.x}, {r.y})',f'Mirror X: {pl.mirror_x}; Y: {pl.mirror_y}',f'Pads ({"verified" if verified else "UNVERIFIED"}): '+', '.join(pins),'Validation: '+('; '.join(es+ws) or 'Valid')]
