@@ -300,3 +300,29 @@ def test_design_type_label_is_inset_bottom_center_and_portable(window):
         assert center.y()==pytest.approx(rect.y+160)
     w.plan=loads(dumps(w.plan,w.catalog),w.catalog); w.project_types={}; w.refresh()
     assert w.plan.project_metadata['P01']['design_type']=='MIX'
+
+
+def test_delete_project_menu_and_undo(window):
+    w=window
+    w.plan.projects=[Project('P01'),Project('P02')]
+    w.plan.frames[0].placements=[Placement('P01','A')]
+    w.plan.project_metadata={'P01':{'design_type':'DIG'}}
+    w.selected='P01'; w.refresh()
+    action=next(a for a in w.menuBar().actions()[0].menu().actions() if a.text()=='Delete Project')
+    action.trigger()
+    assert [p.id for p in w.plan.projects]==['P02']
+    assert not w.plan.frames[0].placements
+    assert 'P01' not in w.plan.project_metadata
+    assert w.selected is None and w.dirty
+    w.undo()
+    assert [p.id for p in w.plan.projects]==['P01','P02']
+    assert w.plan.frames[0].placements==[Placement('P01','A')]
+    assert w.plan.project_metadata['P01']=={'design_type':'DIG'}
+    w.redo()
+    assert [p.id for p in w.plan.projects]==['P02']
+    # Unassigned projects can also be deleted; no selection is a no-op.
+    w.selected='P02'; action.trigger()
+    assert not w.plan.projects
+    history=len(w.undo_stack)
+    action.trigger()
+    assert len(w.undo_stack)==history
