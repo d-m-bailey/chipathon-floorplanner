@@ -331,6 +331,7 @@ def test_delete_project_menu_and_undo(window):
 def test_pr_boundary_match_highlighting(window):
     from PySide6.QtGui import QColor
     from PySide6.QtWidgets import QGraphicsSimpleTextItem
+    from PySide6.QtCore import Qt
     w=window; b=w.catalog['A']
     w.plan.projects=[Project('P01')]
     w.plan.frames[0].placements=[Placement('P01','A')]
@@ -339,14 +340,41 @@ def test_pr_boundary_match_highlighting(window):
     assert f'PR boundary size: {b.width_um:g} × {b.height_um:g} µm' in w.inspector.toPlainText()
     assert w.palette.item(0).foreground().color()==QColor('#008000')
     block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
-    assert block.pen().color()==QColor('#008000')
+    assert block.pen().color()!=QColor('#008000')
+    assert block.brush().style()==Qt.SolidPattern
     label=next(i for i in block.childItems() if isinstance(i,QGraphicsSimpleTextItem) and 'P01' in i.text())
-    assert label.brush().color()==QColor('#008000')
+    assert label.brush().color()==QColor('black')
     w.pr_boundary_sizes={'P01':(b.width_um+1,b.height_um)}; w.refresh()
     assert not w.boundary_matches('P01','A')
+    block=next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01')
+    assert block.brush().style()==Qt.TexturePattern
+    texture=block.brush().textureImage()
+    assert texture.pixelColor(32,0)==QColor('#cccccc')
+    assert texture.pixelColor(32,32)!=QColor('#cccccc')
     assert w.palette.item(0).foreground().color()!=QColor('#008000')
     # Embedded boundary metadata works without the local audit.
     w.pr_boundary_sizes={}; w.plan.project_metadata['P01']['pr_boundary_size_um']=[b.width_um,b.height_um]
     w.refresh()
     assert w.boundary_matches('P01','A')
     assert not w.boundary_matches('P01','?')
+
+
+def test_layout_colors_follow_position(window):
+    from floorplanner.gui.main_window import layout_block_color,POSITION_COLORS
+    from PySide6.QtGui import QColor
+    catalog=window.catalog
+    for mx,my,corner in [(False,False,'NW'),(True,False,'NE'),(True,True,'SE'),(False,True,'SW')]:
+        for kind in ('D','A','BH','BV','ACH','ACV','ACE'):
+            assert layout_block_color(catalog[kind],mx,my)==QColor(POSITION_COLORS[corner])
+    for kind,mx,my,side in [('EH',False,False,'W'),('EH',True,False,'E'),('EV',False,False,'N'),('EV',False,True,'S')]:
+        assert layout_block_color(catalog[kind],mx,my)==QColor(POSITION_COLORS[side])
+    # ACE2 has cut-outs at NE and SW; its occupied NW corner wins over sides.
+    assert layout_block_color(catalog['ACE2'])==QColor(POSITION_COLORS['NW'])
+    assert layout_block_color(catalog['ACE2'],True)==QColor(POSITION_COLORS['NE'])
+    w=window; w.plan.projects=[Project('P01')]
+    w.plan.frames[0].placements=[Placement('P01','A')]; w.refresh()
+    def color():
+        return next(i for i in w.frame_items[0].childItems() if i.data(0)=='P01').brush().color()
+    original=color()
+    w.plan.projects.append(Project('P02')); w.plan.frames[0].placements.append(Placement('P02','A',True,True)); w.refresh()
+    assert color()==original

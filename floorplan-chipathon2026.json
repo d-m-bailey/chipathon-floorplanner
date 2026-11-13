@@ -59,7 +59,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        605.0,
+        605.0
+      ]
     },
     "A02": {
       "actual_size_um": [
@@ -157,7 +161,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A06": {
       "actual_size_um": [
@@ -231,7 +239,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        550.0
+      ]
     },
     "A07": {
       "actual_size_um": [
@@ -297,7 +309,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A09": {
       "actual_size_um": [
@@ -359,7 +375,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        550.0,
+        1110.0
+      ]
     },
     "A10": {
       "actual_size_um": [
@@ -401,7 +421,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A12": {
       "actual_size_um": [
@@ -499,7 +523,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1675.0,
+        1110.0
+      ]
     },
     "A13": {
       "actual_size_um": [
@@ -565,7 +593,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        1110.0
+      ]
     },
     "A19": {
       "actual_size_um": [
@@ -703,7 +735,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        2084.0,
+        2084.0
+      ]
     },
     "A20": {
       "actual_size_um": [
@@ -749,7 +785,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        550.0
+      ]
     },
     "A23": {
       "pins": [
@@ -831,7 +871,11 @@
         126.48,
         228.95
       ],
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        158.625,
+        241.84
+      ]
     },
     "A28": {
       "actual_size_um": [
@@ -857,7 +901,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "A30": {
       "actual_size_um": [
@@ -939,7 +987,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A34": {
       "actual_size_um": [
@@ -1013,7 +1065,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1675.0,
+        1675.0
+      ]
     },
     "A37": {
       "actual_size_um": [
@@ -1047,7 +1103,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A40": {
       "actual_size_um": [
@@ -1165,7 +1225,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1675.0,
+        1110.0
+      ]
     },
     "A43": {
       "actual_size_um": [
@@ -1215,7 +1279,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1400.0,
+        500.0
+      ]
     },
     "A44": {
       "actual_size_um": [
@@ -1285,7 +1353,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A45": {
       "actual_size_um": [
@@ -1383,7 +1455,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A48": {
       "actual_size_um": [
@@ -1429,7 +1505,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "A49": {
       "actual_size_um": [
@@ -1495,7 +1575,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        605.0,
+        1110.0
+      ]
     },
     "A52": {
       "actual_size_um": [
@@ -1557,7 +1641,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        371.45,
+        511.385
+      ]
     },
     "A53": {
       "actual_size_um": [
@@ -1607,7 +1695,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        605.0,
+        605.0
+      ]
     },
     "A54": {
       "actual_size_um": [
@@ -1705,7 +1797,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "A56": {
       "actual_size_um": [
@@ -1759,7 +1855,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1675.0,
+        1110.0
+      ]
     },
     "A58": {
       "actual_size_um": [
@@ -1805,7 +1905,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1400.0,
+        1400.0
+      ]
     },
     "A63": {
       "actual_size_um": [
@@ -1863,7 +1967,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        550.0,
+        1110.0
+      ]
     },
     "A64": {
       "actual_size_um": [
@@ -1905,7 +2013,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "A66": {
       "actual_size_um": [
@@ -1955,7 +2067,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "A68": {
       "actual_size_um": [
@@ -1997,7 +2113,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1000.0,
+        1000.0
+      ]
     },
     "A71": {
       "actual_size_um": [
@@ -2055,77 +2175,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "DIG"
-    },
-    "B02": {
-      "actual_size_um": [
-        289.53,
-        134.96
-      ],
-      "pins": [
-        {
-          "name": "VDD_1",
-          "io_type": "power"
-        },
-        {
-          "name": "VSS_1",
-          "io_type": "ground"
-        },
-        {
-          "name": "CSENS",
-          "io_type": "analog"
-        },
-        {
-          "name": "CREF",
-          "io_type": "analog"
-        },
-        {
-          "name": "VCTRL",
-          "io_type": "analog"
-        },
-        {
-          "name": "CAPBANK[0]",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "CAPBANK[1]",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "CAPBANK[2]",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "DFF_IN_SEL",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "DFF_IN1",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "DFF_IN2",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "CHOP",
-          "io_type": "input_cmos"
-        },
-        {
-          "name": "CCOSENS_OUT",
-          "io_type": "bidirectional"
-        },
-        {
-          "name": "CCOREF_OUT",
-          "io_type": "bidirectional"
-        },
-        {
-          "name": "DOUT",
-          "io_type": "bidirectional"
-        }
-      ],
-      "export_control": false,
-      "design_type": "ANA"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        502.89,
+        520.81
+      ]
     },
     "B04": {
       "actual_size_um": [
@@ -2175,7 +2229,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "B05": {
       "actual_size_um": [
@@ -2249,7 +2307,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        253.12,
+        510.72
+      ]
     },
     "B07": {
       "pins": [
@@ -2389,7 +2451,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "B11": {
       "pins": [
@@ -2533,7 +2599,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "B14": {
       "actual_size_um": [
@@ -2615,7 +2685,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "B18": {
       "actual_size_um": [
@@ -2701,7 +2775,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "B22": {
       "actual_size_um": [
@@ -2767,7 +2845,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "B23": {
       "actual_size_um": [
@@ -2829,7 +2911,11 @@
         }
       ],
       "export_control": false,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        600.0,
+        600.0
+      ]
     },
     "B24": {
       "pins": [
@@ -2903,7 +2989,11 @@
         136.385,
         377.995
       ],
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        1110.0
+      ]
     },
     "B26": {
       "actual_size_um": [
@@ -2965,7 +3055,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "B29": {
       "pins": [
@@ -3097,7 +3191,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "C04": {
       "pins": [
@@ -3261,7 +3359,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        1110.0,
+        1675.0
+      ]
     },
     "D04": {
       "actual_size_um": [
@@ -3295,7 +3397,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "D05": {
       "actual_size_um": [
@@ -3325,7 +3431,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        550.0
+      ]
     },
     "D08": {
       "actual_size_um": [
@@ -3399,7 +3509,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        550.0,
+        1110.0
+      ]
     },
     "D10": {
       "actual_size_um": [
@@ -3445,7 +3559,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        605.0,
+        605.0
+      ]
     },
     "D14": {
       "actual_size_um": [
@@ -3495,7 +3613,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "ANA"
+      "design_type": "ANA",
+      "pr_boundary_size_um": [
+        410.0,
+        390.0
+      ]
     },
     "D15": {
       "actual_size_um": [
@@ -3593,7 +3715,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "DIG"
+      "design_type": "DIG",
+      "pr_boundary_size_um": [
+        1110.0,
+        1110.0
+      ]
     },
     "D16": {
       "actual_size_um": [
@@ -3675,7 +3801,11 @@
         }
       ],
       "export_control": true,
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        950.695,
+        968.615
+      ]
     }
   },
   "projects": [
@@ -3815,7 +3945,7 @@
     {
       "id": "A48",
       "name": "A48",
-      "block_type": "EH2",
+      "block_type": "EV2",
       "pin_count": 9,
       "shared_nets": {}
     },
@@ -3897,13 +4027,6 @@
       "shared_nets": {}
     },
     {
-      "id": "B02",
-      "name": "B02",
-      "block_type": "ACE",
-      "pin_count": 28,
-      "shared_nets": {}
-    },
-    {
       "id": "B04",
       "name": "B04",
       "block_type": "A",
@@ -3948,7 +4071,7 @@
     {
       "id": "B14",
       "name": "B14",
-      "block_type": "BVE",
+      "block_type": "BHE",
       "pin_count": 18,
       "shared_nets": {}
     },
@@ -4075,16 +4198,16 @@
       ],
       "placements": [
         {
-          "project_id": "A40",
-          "block_type": "ACV",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
           "project_id": "A09",
           "block_type": "BV",
           "mirror_x": true,
           "mirror_y": false
+        },
+        {
+          "project_id": "B18",
+          "block_type": "A",
+          "mirror_x": false,
+          "mirror_y": true
         },
         {
           "project_id": "A30",
@@ -4093,10 +4216,10 @@
           "mirror_y": true
         },
         {
-          "project_id": "B18",
-          "block_type": "A",
+          "project_id": "A40",
+          "block_type": "ACV",
           "mirror_x": false,
-          "mirror_y": true
+          "mirror_y": false
         }
       ],
       "pads": []
@@ -4366,18 +4489,12 @@
     },
     {
       "id": "chip_09",
-      "name": "Chip 9",
+      "name": "Chip 16",
       "canvas_position": [
         0,
-        2500
+        -1000
       ],
       "placements": [
-        {
-          "project_id": "B02",
-          "block_type": "ACE",
-          "mirror_x": false,
-          "mirror_y": false
-        },
         {
           "project_id": "B23",
           "block_type": "BH",
@@ -4401,23 +4518,6 @@
           "block_type": "D",
           "mirror_x": true,
           "mirror_y": true
-        }
-      ],
-      "pads": []
-    },
-    {
-      "id": "chip_10",
-      "name": "Chip 10",
-      "canvas_position": [
-        3500,
-        2500
-      ],
-      "placements": [
-        {
-          "project_id": "A48",
-          "block_type": "EH2",
-          "mirror_x": true,
-          "mirror_y": false
         },
         {
           "project_id": "A19",
@@ -4429,52 +4529,62 @@
       "pads": []
     },
     {
-      "id": "chip_11",
-      "name": "Chip 11",
+      "id": "chip_10",
+      "name": "Chip 10",
       "canvas_position": [
-        0,
+        3500,
         -1000
       ],
       "placements": [
         {
-          "project_id": "B07",
-          "block_type": "BVE",
+          "project_id": "C04",
+          "block_type": "ACE",
           "mirror_x": false,
           "mirror_y": false
         },
         {
-          "project_id": "C04",
-          "block_type": "ACE",
+          "project_id": "B07",
+          "block_type": "BVE",
           "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "A48",
+          "block_type": "EV2",
+          "mirror_x": false,
           "mirror_y": true
         }
       ],
       "pads": []
     },
     {
+      "id": "chip_11",
+      "name": "Chip 11",
+      "canvas_position": [
+        7000,
+        -1000
+      ],
+      "placements": [],
+      "pads": []
+    },
+    {
       "id": "chip_12",
       "name": "Chip 12",
       "canvas_position": [
-        10500,
+        7000,
         2500
       ],
       "placements": [
         {
-          "project_id": "D14",
-          "block_type": "D",
-          "mirror_x": true,
-          "mirror_y": true
-        },
-        {
-          "project_id": "B14",
-          "block_type": "BVE",
-          "mirror_x": true,
+          "project_id": "B26",
+          "block_type": "ACE",
+          "mirror_x": false,
           "mirror_y": false
         },
         {
-          "project_id": "B24",
-          "block_type": "BH",
-          "mirror_x": false,
+          "project_id": "A23",
+          "block_type": "BVE",
+          "mirror_x": true,
           "mirror_y": false
         }
       ],
@@ -4482,9 +4592,9 @@
     },
     {
       "id": "chip_13",
-      "name": "Chip 13",
+      "name": "Chip 9",
       "canvas_position": [
-        14000,
+        0,
         2500
       ],
       "placements": [
@@ -4520,30 +4630,17 @@
       "name": "Chip 14",
       "canvas_position": [
         10500,
-        -1000
+        2500
       ],
-      "placements": [
-        {
-          "project_id": "B26",
-          "block_type": "ACE",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
-          "project_id": "A23",
-          "block_type": "BVE",
-          "mirror_x": true,
-          "mirror_y": false
-        }
-      ],
+      "placements": [],
       "pads": []
     },
     {
       "id": "chip_15",
       "name": "Chip 15",
       "canvas_position": [
-        14000,
-        -1000
+        3500,
+        2500
       ],
       "placements": [
         {
@@ -4551,6 +4648,24 @@
           "block_type": "CH2",
           "mirror_x": false,
           "mirror_y": false
+        },
+        {
+          "project_id": "B24",
+          "block_type": "BH",
+          "mirror_x": false,
+          "mirror_y": false
+        },
+        {
+          "project_id": "D14",
+          "block_type": "D",
+          "mirror_x": false,
+          "mirror_y": true
+        },
+        {
+          "project_id": "B14",
+          "block_type": "BHE",
+          "mirror_x": true,
+          "mirror_y": true
         }
       ],
       "pads": []

@@ -33,6 +33,38 @@ from ..chip_yaml import export_chip_yaml
 from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts, load_pr_boundary_sizes
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
+POSITION_COLORS={
+    'NW':'#ee9636','NE':'#429fef','SE':'#ad62db','SW':'#eb6085',
+    'N':'#d5a9ed','E':'#f5aec1','S':'#f6ca93','W':'#a2cff7',
+}
+
+
+def layout_block_brush(color,matches):
+    if matches: return QBrush(color)
+    tile=QImage(64,64,QImage.Format_ARGB32)
+    tile.fill(QColor('#cccccc'))
+    painter=QPainter(tile)
+    painter.setPen(QPen(color,42.9))
+    for offset in (-64,0,64):
+        painter.drawLine(offset,64,offset+64,0)
+    painter.end()
+    brush=QBrush(tile)
+    brush.setTransform(QTransform.fromScale(3,3))
+    return brush
+
+
+def layout_block_color(block,mx=False,my=False):
+    parts=occupied(block,mx,my)
+    # Use occupied geometry so cut-out corners do not determine the color.
+    for corner,x,y in [('NW',350,2585),('NE',2585,2585),('SE',2585,350),('SW',350,350)]:
+        if any(r.x<=x<=r.x+r.w and r.y<=y<=r.y+r.h for r in parts):
+            return QColor(POSITION_COLORS[corner])
+    for side in ('N','E','S','W'):
+        if any({'N':r.y+r.h==2585,'E':r.x+r.w==2585,'S':r.y==350,'W':r.x==350}[side] for r in parts):
+            return QColor(POSITION_COLORS[side])
+    return QColor('#b0bec5')
+
+
 class PinLabel(QGraphicsSimpleTextItem):
     # Keep text hidden until its rendered font height is readable.
     MIN_LOD=0.3
@@ -261,17 +293,13 @@ class MainWindow(QMainWindow):
         documented=self.documented_codes()
         for f in self.plan.frames:
             frame_item=FrameItem(f,self); self.frame_items.append(frame_item); self.view.scene().addItem(frame_item)
-            project_ids=sorted(p.project_id for p in f.placements)
-            colors={pid:QColor.fromHsv(index*360//len(project_ids),135,210)
-                    for index,pid in enumerate(project_ids)}
             for p in f.placements:
                 b=self.catalog[p.block_type]; path=QPainterPath()
                 for r in occupied(b,p.mirror_x,p.mirror_y): path.addRect(r.x,r.y,r.w,r.h)
-                color=colors[p.project_id]
+                color=layout_block_color(b,p.mirror_x,p.mirror_y)
                 outline=QColor('#ff3030') if p.project_id.upper() not in documented else QColor('white') if self.selected==p.project_id else color
                 matches=self.boundary_matches(p.project_id,p.block_type)
-                if matches: outline=QColor('#008000')
-                item=self.view.scene().addPath(path,QPen(outline,25 if matches else 20 if p.project_id.upper() not in documented else 15),QBrush(color)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
+                item=self.view.scene().addPath(path,QPen(outline,20 if p.project_id.upper() not in documented else 15),layout_block_brush(color,matches)); item.setParentItem(frame_item); item.setData(0,p.project_id); item.setZValue(1)
                 project=self.plan.project(p.project_id)
                 r=bounds(b,p.mirror_x,p.mirror_y)
                 actual=self.plan.project_metadata.get(p.project_id.upper(),{}).get('actual_size_um')
@@ -291,12 +319,12 @@ class MainWindow(QMainWindow):
                     pin_label=PinLabel(name,color,dot,angle=-45 if p.mirror_x != p.mirror_y else 45)
                     pin_label.setPos(x,y)
                 label=QGraphicsSimpleTextItem(f'{project.name} · {p.block_type}\n{project.pin_count}/{b.pin_count} pins',item)
-                label.setBrush(QColor('#008000') if matches else QColor('#101c29'))
+                label.setBrush(QColor('black'))
                 label.setScale(min(7,(r.w-70)/max(1,label.boundingRect().width()),(r.h-80)/max(1,label.boundingRect().height())))
                 label.setPos(r.x+35,r.y+r.h-40); label.setTransform(QTransform.fromScale(1,-1))
                 orientation_label=QGraphicsSimpleTextItem('F',item)
                 orientation_label.setFont(label.font())
-                orientation_label.setBrush(QColor('#101c29'))
+                orientation_label.setBrush(QColor('black'))
                 center=orientation_label.boundingRect().center()
                 sx=-label.scale() if p.mirror_x else label.scale()
                 sy=label.scale() if p.mirror_y else -label.scale()
@@ -306,7 +334,7 @@ class MainWindow(QMainWindow):
                 design_type=self.plan.project_metadata.get(p.project_id.upper(),{}).get('design_type')
                 if design_type:
                     type_label=QGraphicsSimpleTextItem(design_type,item)
-                    type_label.setBrush(QColor('#101c29'))
+                    type_label.setBrush(QColor('black'))
                     type_label.setFont(label.font())
                     center=type_label.boundingRect().center()
                     type_label.setTransform(QTransform().scale(label.scale(),-label.scale()).translate(-center.x(),-center.y()))
