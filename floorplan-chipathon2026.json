@@ -3014,11 +3014,35 @@
           "io_type": "analog"
         },
         {
+          "name": "Z",
+          "io_type": "analog"
+        },
+        {
+          "name": "ZN",
+          "io_type": "bidirectional"
+        },
+        {
           "name": "ZP",
           "io_type": "bidirectional"
         },
         {
+          "name": "Y",
+          "io_type": "analog"
+        },
+        {
+          "name": "YN",
+          "io_type": "bidirectional"
+        },
+        {
           "name": "YP",
+          "io_type": "bidirectional"
+        },
+        {
+          "name": "X",
+          "io_type": "analog"
+        },
+        {
+          "name": "XN",
           "io_type": "bidirectional"
         },
         {
@@ -3200,6 +3224,14 @@
     "C04": {
       "pins": [
         {
+          "name": "VDD",
+          "io_type": "power"
+        },
+        {
+          "name": "VSS",
+          "io_type": "ground"
+        },
+        {
           "name": "RESET_N",
           "io_type": "input_cmos"
         },
@@ -3218,14 +3250,6 @@
         {
           "name": "DOUT",
           "io_type": "input_cmos"
-        },
-        {
-          "name": "VDD",
-          "io_type": "power"
-        },
-        {
-          "name": "VSS",
-          "io_type": "ground"
         },
         {
           "name": "ROW0_PLL_IN",
@@ -3252,12 +3276,16 @@
           "io_type": "analog"
         }
       ],
-      "export_control": false,
+      "export_control": true,
       "actual_size_um": [
-        2804.03,
-        2804.03
+        1461.155,
+        974.12
       ],
-      "design_type": "MIX"
+      "design_type": "MIX",
+      "pr_boundary_size_um": [
+        1713.26,
+        1307.03
+      ]
     },
     "D03": {
       "actual_size_um": [
@@ -4106,8 +4134,8 @@
     {
       "id": "B26",
       "name": "B26",
-      "block_type": "ACE",
-      "pin_count": 13,
+      "block_type": "A",
+      "pin_count": 19,
       "shared_nets": {}
     },
     {
@@ -4127,7 +4155,7 @@
     {
       "id": "C04",
       "name": "C04",
-      "block_type": "ACE",
+      "block_type": "ACV",
       "pin_count": 13,
       "shared_nets": {}
     },
@@ -4537,12 +4565,6 @@
       ],
       "placements": [
         {
-          "project_id": "C04",
-          "block_type": "ACE",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
           "project_id": "B07",
           "block_type": "BVE",
           "mirror_x": true,
@@ -4576,15 +4598,15 @@
       ],
       "placements": [
         {
-          "project_id": "B26",
-          "block_type": "ACE",
-          "mirror_x": false,
-          "mirror_y": false
-        },
-        {
           "project_id": "A23",
           "block_type": "BVE",
           "mirror_x": true,
+          "mirror_y": false
+        },
+        {
+          "project_id": "C04",
+          "block_type": "ACV",
+          "mirror_x": false,
           "mirror_y": false
         }
       ],
@@ -4666,6 +4688,12 @@
           "block_type": "BHE",
           "mirror_x": true,
           "mirror_y": true
+        },
+        {
+          "project_id": "B26",
+          "block_type": "A",
+          "mirror_x": true,
+          "mirror_y": false
         }
       ],
       "pads": []
