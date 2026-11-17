@@ -32,7 +32,7 @@ def chip_documents(plan,catalog):
     if errors: raise ValueError('Cannot export invalid placements:\n'+'\n'.join(errors))
     documents={}
     for index,frame in enumerate(plan.frames,1):
-        match=re.fullmatch(r'chip_(\d+)',frame.id)
+        match=re.fullmatch(r'chip[ _]+(\d+)',frame.name.strip(),re.IGNORECASE)
         number=int(match[1]) if match else index
         filename=f'IEEE{number}.yaml'
         if filename in documents: raise ValueError(f'Duplicate output filename: {filename}')

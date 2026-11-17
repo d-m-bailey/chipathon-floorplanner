@@ -213,3 +213,14 @@ def test_pr_boundary_sizes(tmp_path,catalog):
     assert loads(dumps(plan,catalog),catalog)==plan
     plan.project_metadata['P01']['pr_boundary_size_um']=[0,550]
     with pytest.raises(ValueError): loads(dumps(plan,catalog),catalog)
+
+
+def test_chip_yaml_uses_display_names(catalog):
+    from floorplanner.chip_yaml import chip_documents
+    plan=Plan(frames=[Frame('chip_09','Chip 16'),Frame('chip_13','Chip 9'),Frame('custom',' chip_03 '),Frame('chip_99','Custom name')])
+    docs=chip_documents(plan,catalog)
+    assert list(docs)==['IEEE16.yaml','IEEE9.yaml','IEEE3.yaml','IEEE4.yaml']
+    assert [doc['chip']['name'] for doc in docs.values()]==['SSCS_2026_16','SSCS_2026_09','SSCS_2026_03','SSCS_2026_04']
+    plan.frames[1].name='Chip 16'
+    with pytest.raises(ValueError,match='Duplicate output filename: IEEE16.yaml'):
+        chip_documents(plan,catalog)
