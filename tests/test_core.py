@@ -224,3 +224,13 @@ def test_chip_yaml_uses_display_names(catalog):
     plan.frames[1].name='Chip 16'
     with pytest.raises(ValueError,match='Duplicate output filename: IEEE16.yaml'):
         chip_documents(plan,catalog)
+
+
+def test_audit_project_codes(tmp_path):
+    from floorplanner.gds_audit import load_project_codes
+    path=tmp_path/'audit.csv'
+    path.write_text('Team,width,power\n c05 ,,invalid\nC05,0,0:\n,10,1:VDD\nB29,,\n')
+    assert load_project_codes(path)==(['C05','B29'],[])
+    assert load_project_codes(tmp_path/'missing.csv')[0]==[]
+    path.write_text('width,height\n1,2\n')
+    assert load_project_codes(path)[1]==['GDS audit is missing Team column']

@@ -90,3 +90,20 @@ def load_pin_counts(path=AUDIT_PATH):
                     reports.append(f'GDS audit row {line} ({code}): {error}')
     except OSError as error: reports.append(f'Unable to read GDS audit: {error}')
     return counts,reports
+
+
+def load_project_codes(path=AUDIT_PATH):
+    """Read all audit teams, even when their dimensions or pin counts are invalid."""
+    codes=[]; reports=[]
+    try:
+        with Path(path).open(newline='',encoding='utf-8-sig') as source:
+            reader=csv.DictReader(source)
+            if 'Team' not in (reader.fieldnames or []):
+                return [],['GDS audit is missing Team column']
+            seen=set()
+            for row in reader:
+                code=(row.get('Team') or '').strip().upper()
+                if code and code not in seen:
+                    codes.append(code); seen.add(code)
+    except OSError as error: reports.append(f'Unable to read GDS audit: {error}')
+    return codes,reports

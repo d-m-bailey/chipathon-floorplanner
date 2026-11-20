@@ -27,7 +27,7 @@ def app():return QApplication.instance() or QApplication([])
 
 @pytest.fixture
 def window(app,tmp_path):
-    w=MainWindow(); w.actual_sizes={}; w.pr_boundary_sizes={}; w.project_pins={}; w.project_types={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
+    w=MainWindow(); w.plan.projects=[]; w.plan.project_metadata={}; w.audit_project_codes=[]; w.audit_pin_counts={}; w.actual_sizes={}; w.pr_boundary_sizes={}; w.project_pins={}; w.project_types={}; w.export_control_directory=tmp_path/'absent'; w.show(); app.processEvents(); yield w
     w.dirty=False; w.close()
 
 def test_gui_drag_and_undo(window,app):
@@ -378,3 +378,46 @@ def test_layout_colors_follow_position(window):
     original=color()
     w.plan.projects.append(Project('P02')); w.plan.frames[0].placements.append(Placement('P02','A',True,True)); w.refresh()
     assert color()==original
+
+
+def test_missing_audit_projects_added_on_open(window,tmp_path):
+    from floorplanner.models import Plan
+    from floorplanner.persistence import save,loads
+    w=window
+    path=tmp_path/'plan.json'
+    original=Project('c01','Existing name','A',3)
+    save(path,Plan([original]),w.catalog)
+    w.audit_project_codes=['C01','C05','B29']
+    w.audit_pin_counts={'C05':22}
+    w.project_pins={'C05':[{'name':'VDD','io_type':'power'}]}
+    w.load_file(path,record_history=False)
+    assert w.plan.projects[0]==original
+    assert [(p.id,p.block_type,p.pin_count) for p in w.plan.projects[1:]]==[('C05','?',22),('B29','?',0)]
+    assert w.plan.project_metadata['C05']['pins']==w.project_pins['C05']
+    assert w.dirty
+    assert any('C05' in w.palette.item(i).text() for i in range(w.palette.count()))
+    w.save_plan()
+    assert len(loads(path.read_text(),w.catalog).projects)==3
+    w.load_file(path,record_history=False)
+    assert len(w.plan.projects)==3 and not w.dirty
+    # Deletion remains effective during refresh and can be undone.
+    w.selected='C05'; w.delete_project(); w.refresh()
+    assert 'C05' not in [p.id for p in w.plan.projects]
+    w.undo()
+    assert 'C05' in [p.id for p in w.plan.projects]
+
+
+def test_audit_projects_added_at_startup_and_new(app,monkeypatch):
+    import floorplanner.gui.main_window as gui
+    monkeypatch.setattr(gui,'load_project_codes',lambda:(['C05'],[]))
+    monkeypatch.setattr(gui,'load_pin_counts',lambda:({'C05':22},[]))
+    w=gui.MainWindow()
+    try:
+        assert [(p.id,p.block_type,p.pin_count) for p in w.plan.projects]==[('C05','?',22)]
+        assert w.dirty
+        w.plan.projects.append(Project('manual'))
+        monkeypatch.setattr(w,'discard_ok',lambda:True)
+        w.new()
+        assert [p.id for p in w.plan.projects]==['C05']
+    finally:
+        w.dirty=False; w.close()

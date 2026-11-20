@@ -30,7 +30,7 @@ from ..persistence import save, loads
 from ..project_loader import import_projects
 from ..export_control import documented_projects, EXPORT_CONTROL_DIRECTORY
 from ..chip_yaml import export_chip_yaml
-from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts, load_pr_boundary_sizes
+from ..gds_audit import load_actual_sizes, load_project_types, load_pin_counts, load_pr_boundary_sizes, load_project_codes
 from ..project_pins import load_project_pins, pin_markers, pin_color
 
 POSITION_COLORS={
@@ -210,6 +210,8 @@ class MainWindow(QMainWindow):
         self.project_types=load_project_types()
         self.audit_pin_counts,pin_count_reports=load_pin_counts()
         self.audit_reports.extend(pin_count_reports)
+        self.audit_project_codes,project_reports=load_project_codes()
+        self.audit_reports.extend(project_reports)
         self.project_pins,self.pin_reports=load_project_pins()
         self.catalog=load_catalog(); self.defaults=json.loads((CONFIG/'chip_frames.json').read_text())
         self.plan=Plan(frames=[Frame(f'chip_{i+1:02}',f'Chip {i+1}',[(i%2)*FRAME_PITCH_UM,(i//2)*FRAME_PITCH_UM],pads=copy.deepcopy(self.defaults['pads'])) for i in range(4)])
@@ -230,6 +232,7 @@ class MainWindow(QMainWindow):
             if key: action.setShortcut(key)
             menu.addAction(action)
             if text in ('Save','Add Project','Add Frame','Mirror X','Mirror Y','Undo','Redo','Fit View'): toolbar.addAction(action)
+        self.add_missing_audit_projects()
         self.refresh(); self.view.fit()
         if self.audit_reports or self.pin_reports: self.statusBar().showMessage('; '.join(self.audit_reports+self.pin_reports))
     def guarded(self,fn):
@@ -237,6 +240,14 @@ class MainWindow(QMainWindow):
         except Exception as e: QMessageBox.warning(self,'Unable to complete action',str(e))
     def checkpoint(self):
         self.undo_stack.append(copy.deepcopy(self.plan)); self.redo_stack.clear(); self.dirty=True
+    def add_missing_audit_projects(self):
+        existing={p.id.upper() for p in self.plan.projects}
+        for code in self.audit_project_codes:
+            if code in existing: continue
+            self.plan.projects.append(Project(code,block_type='?',pin_count=self.audit_pin_counts.get(code,0)))
+            existing.add(code)
+            self.dirty=True
+
     def sync_metadata(self):
         documented=documented_projects(self.export_control_directory) if self.export_control_directory.is_dir() else None
         changed=False
@@ -457,7 +468,7 @@ class MainWindow(QMainWindow):
         if result==QMessageBox.Save:return self.save_plan()
         return True
     def new(self):
-        if self.discard_ok(): self.checkpoint(); self.plan=Plan(); self.path=None; self.selected=None; self.refresh()
+        if self.discard_ok(): self.checkpoint(); self.plan=Plan(); self.path=None; self.selected=None; self.add_missing_audit_projects(); self.refresh()
     def open(self):
         if not self.discard_ok():return
         path,_=QFileDialog.getOpenFileName(self,'Open floorplan','','JSON (*.json)')
@@ -468,6 +479,7 @@ class MainWindow(QMainWindow):
         if record_history: self.checkpoint()
         else: self.undo_stack.clear(); self.redo_stack.clear()
         self.plan=plan; self.path=path; self.selected=None; self.dirty=False
+        self.add_missing_audit_projects()
         self.refresh(); self.view.fit()
     def save_plan(self,save_as=False):
         path=self.path
